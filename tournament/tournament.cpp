@@ -135,12 +135,8 @@ vector<team> new_game(const vector<team> & teams, const vector<string> & games, 
 }
 
 void tournament() {
-    player p;
-    p.id=0, p.first_name="romain", p.last_name="clement";
-    cout << p << endl;
-    //cout << p << endl;
     // Creation des objets joueurs
-    /*vector<player> players = createPlayers(NAMESPATH);
+    vector<player> players = createPlayers(NAMESPATH);
     // Creation des equipes
     vector<team> teams = createTeams(players);
 
@@ -157,5 +153,5 @@ void tournament() {
 
     for (unsigned i=0; i<nbR; i++) {
         teams = new_game(teams, games, i);
-    }*/
+    }
 }
