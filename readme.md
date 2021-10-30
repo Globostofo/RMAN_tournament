@@ -49,7 +49,7 @@ using namespace global_const;
 ```
 
 #### 1.1.1 NAMEPATH
-Contient le chemin relatif du fichier `/tournament/students.txt` du point de vue du fichier `/tournament/tournament.cpp`.
+Contient le chemin relatif du fichier `/tournament/students.txt` du point de vue de l'exécutable créé lors de la compilation.
 ```cpp
 const string NAMEPATH;
 ```
@@ -96,12 +96,12 @@ Affiche *test* dans la console. Utile pour repérer à quel moment un programme 
 void test();
 ```
 #### 1.2.2 readFile
-Récupère la liste de toutes les lignes d'un document texte dont le chemin est passé en paramètre.
+Récupère la liste de toutes les lignes d'un document texte dont le chemin est passé en paramètre (Un chemin relatif part toujours de l'exécutable créé lors de la copmilation).
 ```cpp
 vector<string> readFile(const string & path);
 ```
 #### 1.2.3 ask4UInput
-Affiche l'invite passée en paramètre et récupère la saisie de l'utilisateur.
+Affiche l'invite passée en paramètre et renvoie la saisie de l'utilisateur.
 ```cpp
 string ask4UInput(const string & invite);
 ```
@@ -110,13 +110,7 @@ Attend que l'utilisateur appuye sur la touche Enter (utilise `waitMsg` (1.1.2) c
 ```cpp
 void pressEnter();
 ```
-#### 1.2.5 minimum
-Sélectionne le plus petit élément des deux paramètres
-```cpp
-template <typename T>
-T minimum(const T & a, const T & b);
-```
-#### 1.2.6 randomSort
+#### 1.2.5 randomSort
 Mélange une liste aléatoirement avec des permutations
 ```cpp
 template <typename T>
