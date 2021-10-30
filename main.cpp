@@ -13,8 +13,6 @@
         •Prevoir (au moins) 3 jeu d’essais en entree et 3 fichiers oracle correspondant
 */
 
-#include <stdlib.h>
-#include <time.h>
 #include "./tournament/tournament.cpp"
 
 using namespace std;
