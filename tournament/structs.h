@@ -9,7 +9,7 @@ struct player {
     string first_name;
     string last_name;
 
-    friend ostream& operator<<(ostream& os, const player & p) {
+    friend ostream & operator<<(ostream & os, const player & p) {
         os << "["
            << p.id
            << "] "
@@ -17,6 +17,10 @@ struct player {
            << " "
            << p.last_name;
         return os;
+    }
+
+    friend bool operator<(const player & lhs, const player & rhs) {
+        return lhs.id < rhs.id;
     }
 };
 
@@ -33,5 +37,9 @@ struct team {
             os << "\n  - " << t.players[i];
         }
         return os;
+    }
+
+    friend bool operator<(const team & lhs, const team & rhs) {
+        return lhs.points > rhs.points || (lhs.points == rhs.points && lhs.id < rhs.id);
     }
 };
