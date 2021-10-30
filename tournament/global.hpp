@@ -1,11 +1,13 @@
+#include <iostream>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
 namespace global_const {
-    const string NAMESPATH = "../S101/students.txt";
+    const string NAMESPATH = "../S101/tournament/students.txt";
 
-    const string waitMsg = "Appuyez sur <entree> pour continuer";
+    const string waitMsg = "Appuyez sur <ENTREE> pour continuer";
 
     const unsigned MINTEAMS = 2;
     const unsigned MAXTEAMS = 15;
