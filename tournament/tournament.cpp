@@ -1,8 +1,6 @@
-#include <iostream>		// std::cout, std::cin
-#include <algorithm>	// std::min, std::sort
-#include <vector>		// std::vector
-#include "global.hpp"	// voir /readme.md
-#include "structs.h"	// voir /readme.md
+#include <algorithm>    // std::sort
+#include "global.hpp"
+#include "structs.h"
 
 using namespace global_const;
 using namespace global_func;
@@ -73,7 +71,7 @@ vector<team> createTeams(vector<player> & players) {
     for (unsigned i=nbP; i<nbP+nbPe; i++) {
         excluded.push_back(players[i]);
     }
-    //excluded = sort(excluded.begin(), excluded.end());
+    sort(excluded.begin(), excluded.end());
     players.resize(nbP);
     if (nbPe != 0) {
         if (nbPe == 1) {
@@ -99,9 +97,9 @@ vector<team> createTeams(vector<player> & players) {
         t.id = i+1;
         t.name = ask4UInput("Nom de l'equipe n°" + to_string(i+1) + " : ");
         t.points = 0;
-        //t.players = sort(teamsPlayers.begin(), teamsPlayers.end());
+        sort(teamsPlayers.begin(), teamsPlayers.end());
         teams.push_back(t);
-        //cout << t << endl;
+        cout << t << endl;
         pressEnter();
     }
 
