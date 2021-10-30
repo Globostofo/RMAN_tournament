@@ -3,7 +3,7 @@
 using namespace std;
 
 namespace global_const {
-    const string NAMESPATH = "./students.txt";
+    const string NAMESPATH = "../S101/students.txt";
 
     const string waitMsg = "Appuyez sur <entree> pour continuer";
 
