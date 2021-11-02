@@ -1,10 +1,22 @@
 #include <algorithm>    // std::sort
 #include "global.hpp"
 #include "structs.h"
+// Importation des jeux
+#include "games/morpion.cpp"
+#include "games/memory.cpp"
+#include "games/p4.cpp"
+#include "games/dames.cpp"
+#include "games/echecs.cpp"
 
 using namespace global_const;
 using namespace global_func;
 
+void dispBoard(const vector<team> & teams) {
+    cout << "Classement actuel des équipes :" << endl;
+    for (unsigned i=0; i<teams.size(); i++) {
+        cout << i+1 << ". " << teams[i].name << endl;
+    }
+}
 
 vector<player> createPlayers(const string & namesPath) {
     /// Fonction de création des joueurs suivant le moule de la structure
@@ -13,7 +25,6 @@ vector<player> createPlayers(const string & namesPath) {
     players.resize(nameList.size() / 2);
     for (unsigned i=0; i<nameList.size()/2; i++) {
         player p;
-        p.id = i+1;
         p.first_name = nameList[2*i + 1];
         p.last_name = nameList[2*i];
         players[i] = p;
@@ -80,31 +91,31 @@ vector<team> createTeams(vector<player> & players) {
             cout << "\nLes joueurs suivants sont exclus :" << endl;
         }
         for (unsigned i=0; i<nbPe; i++) {
-            //cout << "  - " << excluded[i] << endl;
+            cout << "  - " << excluded[i] << endl;
         }
     }
     pressEnter();
 
     // Demande des noms des equipes
     vector<team> teams;
-    vector<player> teamsPlayers;
     for (unsigned i=0; i<nbT; i++) {
-        teamsPlayers.resize(0);
+        vector<player> teamsPlayers;
         for (unsigned j=0; j<nbPbT; j++) {
-            teamsPlayers.push_back(players[i * nbPbT + j]);
+            teamsPlayers.push_back(players[i*nbPbT + j]);
         }
         team t;
-        t.id = i+1;
         t.name = ask4UInput("Nom de l'equipe n°" + to_string(i+1) + " : ");
         t.points = 0;
         sort(teamsPlayers.begin(), teamsPlayers.end());
+        t.players = teamsPlayers;
         teams.push_back(t);
-        cout << t << endl;
+        cout << t.name << " :" << endl;
+
+        for (const player & p : teamsPlayers) {
+            cout << "  - " << p << endl;
+        }
         pressEnter();
     }
-
-    // Assignation et affiche les joueurs dans leur equipe
-
 
     return teams;
 }
@@ -123,10 +134,49 @@ vector<vector<team>> matchmaking(const vector<team> & teams) {
     return board;
 }
 
-vector<team> new_game(const vector<team> & teams, const vector<string> & games, const unsigned & nbRound) {
+vector<team> round(vector<team> & teams, const string & game) {
     vector<vector<team>> board = matchmaking(teams);
 
-    cout << "Manche n°" << nbRound+1 << " : " << games[nbRound] << endl;
+    for (unsigned i=0; i<board.size(); i++) {
+        unsigned winner=0;
+        if (board[i].size() == 2) {
+            team t1 = board[i][0];
+            team t2 = board[i][1];
+            cout << "Rencontre n°" << i+1 << " : " << t1.name << " vs " << t2.name << endl;
+            pressEnter();
+
+            if (game == "memory") {
+                //winner = memory(t1.name, t2.name);
+            }
+            else if (game == "morpion") {
+                //winner = morpion(t1.name, t2.name);
+            }
+            else if (game == "puissance 4") {
+                //winner = p4(t1.name, t2.name);
+            }
+            else if (game == "dames") {
+                winner = dames(t1.name, t2.name);
+            }
+            else if (game == "echecs") {
+                //winner = echecs(t1.name, t2.name);
+            }
+            cout << "L'equipe " << board[i][winner].name << " gagne 1 point" << endl;
+        } else {
+            team t = board[i][0];
+            cout << "L'equipe " << t.name << " est exemptee, elle gagne 1 point" << endl;
+            winner = 0;
+        }
+        cout << board[i][winner].points << endl;
+        board[i][winner].points++;
+        cout << board[i][winner].points << endl;
+        pressEnter();
+    }
+
+    for (unsigned i=0; i<teams.size(); i++) {
+        cout << teams[i].points << endl;
+    }
+    sort(teams.begin(), teams.end());
+    dispBoard(teams);
     pressEnter();
 
     return teams;
@@ -138,18 +188,13 @@ void tournament() {
     // Creation des equipes
     vector<team> teams = createTeams(players);
 
-    // Constantes du tournoi
-    const unsigned nbP = players.size();
-    const unsigned nbT = teams.size();
-    const unsigned nbR = min(NBGAMES, nbT-1);
-    const vector<string> games = randomSort(GAMESNAME);
-
-    cout << nbP << endl << nbT << endl << nbR << endl;
-
-    cout << "Le tournoi va commencer !\nIl se déroulera en " << nbR << " manches." << endl;
+    cout << "Le tournoi va commencer !\nIl se déroulera en " << NBGAMES << " manches." << endl;
     pressEnter();
 
-    for (unsigned i=0; i<nbR; i++) {
-        teams = new_game(teams, games, i);
+    vector<string> games = randomSort(GAMESNAME);
+    for (unsigned i=0; i<NBGAMES; i++) {
+        cout << "Manche n°" << i+1 << " : " << games[i] << endl;
+        pressEnter();
+        teams = round(teams, games[i]);
     }
 }
