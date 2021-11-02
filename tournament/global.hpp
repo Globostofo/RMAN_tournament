@@ -64,4 +64,12 @@ namespace global_func {
         }
         return vSorted;
     }
+
+    string completion0X(const string & txt, const unsigned nb_char) {
+        string output = txt;
+        while (output.size() < nb_char) {
+            output = "0" + output;
+        }
+        return output;
+    }
 }
