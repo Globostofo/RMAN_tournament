@@ -116,6 +116,11 @@ Mélange une liste aléatoirement avec des permutations
 template <typename T>
 vector<T> randomSort(const vector<T> & v);
 ```
+#### 1.2.6 leftAlign
+Complète une chaîne de caractères par des espaces à droite (utile pour `cuteLilBoard()` (1.2.9)
+```cpp
+string leftAlign(const string & txt, const unsigned & nb_char)
+```
 
 
 ## 2. Le tournoi
