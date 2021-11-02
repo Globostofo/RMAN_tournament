@@ -117,9 +117,53 @@ template <typename T>
 vector<T> randomSort(const vector<T> & v);
 ```
 #### 1.2.6 leftAlign
-Complète une chaîne de caractères par des espaces à droite (utile pour `cuteLilBoard()` (1.2.9)
+Complète une chaîne de caractères par `nb_char-txt.size()` espaces à droite (utile pour `cuteLilBoard()` (1.2.9)
 ```cpp
-string leftAlign(const string & txt, const unsigned & nb_char)
+string leftAlign(const string & txt, const unsigned & nb_char);
+```
+#### 1.2.7 rightAlign
+Complète une chaîne de caractères par `nb_char-txt.size()` espaces à gauche (utile pour `cuteLilBoard()` (1.2.9)
+```cpp
+string rightAlign(const string & txt, const unsigned & nb_char);
+```
+#### 1.2.8 centerAlign
+Complète une chaîne de caractères par `nb_char-txt.size()` espaces répartis à gauche et à droite (utile pour `cuteLilBoard()` (1.2.9)
+```cpp
+string centerAlign(const string & txt, const unsigned & nb_char);
+```
+#### 1.2.9 cuteLilBoard
+Affiche un tableau dans la console.
+```cpp
+void cuteLilBoard(const vector<vector<string>> & content, const vector<char> & align, const bool & header=false);
+```
+`content` est la liste des éléments du tableau. Exemple : `{ {"a", "b", "c"}, {"d", "e", "f"} }` fera un tableau comme celui-ci :
+```
+---------
+| a | d |
+| b | e |
+| c | f |
+---------
+```
+`align` correspond à l'alignement dans chaque colonne (voir 1.2.6/1.2.7/1.2.8). Exemple : `{'r', 'l', 'c'}` fera un tableau comme celui-ci :
+```
+----------------------
+|    a | a    |  a   |
+|   bb | bb   |  bb  |
+|  ccc | ccc  | ccc  |
+| dddd | dddd | dddd |
+----------------------
+```
+`header` est l'argument d'entête, qui permet de séparer et de centrer la première ligne du tableau, exemple :
+```
+----------------
+|   a   |  d   |
+----------------
+|     b |    b |
+|    cc |   cc |
+|   ddd |  ddd |
+|  eeee | eeee |
+| fffff |   ab |
+----------------
 ```
 
 
