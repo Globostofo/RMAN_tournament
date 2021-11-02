@@ -12,10 +12,14 @@ using namespace global_const;
 using namespace global_func;
 
 void dispBoard(const vector<team> & teams) {
-    cout << "Classement actuel des équipes :" << endl;
+    vector<vector<string>> content = {{"Rang"}, {"Equipe"}, {"Pts"}};
     for (unsigned i=0; i<teams.size(); i++) {
-        cout << i+1 << ". " << teams[i].name << endl;
+        content[0].push_back(to_string(i+1));
+        content[1].push_back(teams[i].name);
+        content[2].push_back(to_string(teams[i].points));
     }
+    cout << "Classement actuel des équipes :" << endl;
+    cuteLilBoard(content, {'r', 'l', 'r'}, true);
 }
 
 vector<player> createPlayers(const string & namesPath) {
@@ -136,6 +140,7 @@ vector<vector<team>> matchmaking(const vector<team> & teams) {
 
 vector<team> round(vector<team> & teams, const string & game) {
     vector<vector<team>> board = matchmaking(teams);
+    teams.resize(0);
 
     for (unsigned i=0; i<board.size(); i++) {
         unsigned winner=0;
@@ -166,15 +171,12 @@ vector<team> round(vector<team> & teams, const string & game) {
             cout << "L'equipe " << t.name << " est exemptee, elle gagne 1 point" << endl;
             winner = 0;
         }
-        cout << board[i][winner].points << endl;
         board[i][winner].points++;
-        cout << board[i][winner].points << endl;
+        for (unsigned j=0; j<board[i].size(); j++)
+            teams.push_back(board[i][j]);
         pressEnter();
     }
 
-    for (unsigned i=0; i<teams.size(); i++) {
-        cout << teams[i].points << endl;
-    }
     sort(teams.begin(), teams.end());
     dispBoard(teams);
     pressEnter();
