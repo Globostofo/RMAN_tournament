@@ -30,10 +30,10 @@ struct carte{
     bool trouvey;
 };
 
+/*
 string createCard(){
     return "";
 }
-/*
 int main() {
     unsigned equipe1;
     cout << "Que la partie commence wouhou !" << endl << endl;
