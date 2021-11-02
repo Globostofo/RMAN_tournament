@@ -65,7 +65,7 @@ namespace global_func {
         return vSorted;
     }
 
-    string leftAlign(const string & txt, const unsigned nb_char) {
+    string leftAlign(const string & txt, const unsigned & nb_char) {
         string output = txt;
         while (output.size() < nb_char) {
             output += " ";
@@ -73,7 +73,7 @@ namespace global_func {
         return output;
     }
 
-    string rightAlign(const string & txt, const unsigned nb_char) {
+    string rightAlign(const string & txt, const unsigned & nb_char) {
         string output = txt;
         while (output.size() < nb_char) {
             output = " " + output;
@@ -81,7 +81,7 @@ namespace global_func {
         return output;
     }
 
-    string centerAlign(const string & txt, const unsigned nb_char) {
+    string centerAlign(const string & txt, const unsigned & nb_char) {
         string output = txt;
         bool side=true;
         while (output.size() < nb_char) {
