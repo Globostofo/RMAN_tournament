@@ -20,12 +20,12 @@ bool rock_paper_scissors(const string & t1, const string & t2){
         if ((p1Choice == "feuille" && p2Choice == "pierre") || (p1Choice == "pierre" && p2Choice == "ciseaux") || (p1Choice == "ciseaux" && p2Choice == "feuille")){
             cout << "l'equipe " + t1 + " gagne cette manche" << endl;
             p1Points++;
-            cout << p1Points + " a " + p2Points << endl;
+            cout << 'p1Points' + " a " + 'p2Points' << endl;
         }
         else if((p2Choice == "feuille" && p1Choice == "pierre") || (p2Choice == "pierre" && p1Choice == "ciseaux") || (p2Choice == "ciseaux" && p1Choice == "feuille")){
             cout << "l'equipe " + t2 + " gagne cette manche" << endl;
             p2Points++;
-            cout << p1Points + " a " + p2Points << endl;
+            cout << 'p1Points' << " a " << 'p2Points' << endl;
         }
         else if(p1Choice == p2Choice){
             cout << "egalite" << endl;
@@ -43,14 +43,4 @@ bool rock_paper_scissors(const string & t1, const string & t2){
         winner = 1;
     }
     return winner;
-}
-
-int main() {
-    string t1;
-    string t2;
-    cout << "Entrer le nom de l'equipe 1 : ";
-    getline(cin, t1);
-    cout << "Entrer le nom de l'equipe 2 : ";
-    getline(cin, t2);
-    return rock_paper_scissors(t1, t2);
 }
