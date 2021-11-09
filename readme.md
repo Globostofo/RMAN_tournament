@@ -140,7 +140,9 @@ void cuteLilBoard(const vector<vector<string>> & content, const vector<char> & a
 ```
 ---------
 | a | d |
+---------
 | b | e |
+---------
 | c | f |
 ---------
 ```
@@ -148,8 +150,11 @@ void cuteLilBoard(const vector<vector<string>> & content, const vector<char> & a
 ```
 ----------------------
 |    a | a    |  a   |
+----------------------
 |   bb | bb   |  bb  |
+----------------------
 |  ccc | ccc  | ccc  |
+----------------------
 | dddd | dddd | dddd |
 ----------------------
 ```
