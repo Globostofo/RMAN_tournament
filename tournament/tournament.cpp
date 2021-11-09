@@ -1,5 +1,5 @@
 #include <algorithm>    // std::sort
-#include "global.hpp"
+//#include "global.hpp"
 #include "structs.h"
 // Importation des jeux
 #include "games/morpion.cpp"
@@ -192,6 +192,9 @@ void tournament() {
 
     cout << "Le tournoi va commencer !\nIl se déroulera en " << NBGAMES << " manches." << endl;
     pressEnter();
+
+    /*unsigned winner = dames("equipe1", "equipe2");
+    cout << "Gagnant : " << winner << endl;*/
 
     vector<string> games = randomSort(GAMESNAME);
     for (unsigned i=0; i<NBGAMES; i++) {

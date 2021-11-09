@@ -30,3 +30,7 @@ struct team {
         return lhs.points > rhs.points || (lhs.points == rhs.points && lhs.name < rhs.name);
     }
 };
+
+/*struct pion {
+
+};*/
