@@ -1,4 +1,4 @@
-/**
+/*
 
 PROJET : Votre équipe est chargée d’organiser un tournoi de petits jeux selon le système suisse.
 Fichier d’entrée la liste (nom / prénom) des 120 étudiants de la promoSaisir la graine.
@@ -19,9 +19,15 @@ Luke : Memory
 
 */
 
-/*#include <iostream>
+#include "../global.hpp"
+#include <iostream>
+#include <vector>
+#include <string>
 
+using namespace global_const;
+using namespace global_func;
 using namespace std;
+
 
 // x et y inutile ?
 
@@ -33,25 +39,49 @@ struct caseP4 {
     string couleur;
 };
 
-vector<vector<caseP4>> initP4(const caseP4 & p){
+vector<vector<caseP4>> initP4(){
     vector<vector<caseP4>> TableauDeP4;
     for(unsigned i = 0; i < 6; i++){
         vector<caseP4> LigneTemp;
         for(unsigned j = 0; j < 7; j++){
-            LigneTemp[i] = (p.couleur = "vide"; p.x = j; p.y = i);
+            caseP4 p;
+            p.couleur = "vide";
+            p.x = j;
+            p.y = i;
+            LigneTemp[j] = p;
         }
+        TableauDeP4[i] = LigneTemp;
     }
 }
 
-*/
-
-//vector<caseP4> initP4
 
 
 
 
+void putRedCoin(){
+    //cout << "Choisissez le numéro de la colonne choisie (de 0 à 6)" << endl;
+
+    while(true){
+        string columnStr = ask4UInput("Choisissez le numéro de la colonne choisie (de 0 à 6)");
+        int columNb = stoi(columnStr,nullptr,10);
+        if (columNb<7 && columNb>=0 && TableauDeP4[0][columNb].couleur == "vide")break;
+        cout << "Le numéro entré n'est pas valide, réessayez !" << endl;
+    }
+
+    for(unsigned i = 0; i<6; i++){
+        if(TableauDeP4[i][columNb].couleur == "vide"){
+            TableauDeP4[i][columNb].couleur = "Red";
+        }
+    }
 
 
+}
+
+
+
+
+
+//vector<caseP4> initP4 ???
 
 
 
