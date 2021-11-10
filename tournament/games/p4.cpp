@@ -29,60 +29,128 @@ using namespace global_func;
 using namespace std;
 
 
-// x et y inutile ?
+// x et y inutile ? Laisser Empty ou mettre juste un espace à la place ?
 
-struct caseP4 {
-    /// Structure de base d'une case banal
-    /// (la couleur peut être jaune/rouge/vide)
+struct cellP4 {
+    // Structure de base d'une case banal
+    // (la couleur peut être Yellow/Red/Empty)
     unsigned x;
     unsigned y;
-    string couleur;
+    string color;
 };
 
-vector<vector<caseP4>> initP4(){
-    vector<vector<caseP4>> TableauDeP4;
+// return un vecteur ou faire un void ?
+
+vector<vector<cellP4>> initP4(){
+    vector<vector<cellP4>> TabP4;
     for(unsigned i = 0; i < 6; i++){
-        vector<caseP4> LigneTemp;
+        vector<cellP4> TempRow;
         for(unsigned j = 0; j < 7; j++){
-            caseP4 p;
-            p.couleur = "vide";
+            cellP4 p;
+            p.color = "Empty";
             p.x = j;
             p.y = i;
-            LigneTemp[j] = p;
+            TempRow[j] = p;
         }
-        TableauDeP4[i] = LigneTemp;
+        TabP4[i] = TempRow;
     }
 }
 
 
 
+//fusion des deux put ? doit renvoyer la position du dernier jeton ?
 
-
-void putRedCoin(){
-    //cout << "Choisissez le numéro de la colonne choisie (de 0 à 6)" << endl;
-
+cellP4 putRedCoin(vector<vector<cellP4>> & TabP4){
     while(true){
         string columnStr = ask4UInput("Choisissez le numéro de la colonne choisie (de 0 à 6)");
-        int columNb = stoi(columnStr,nullptr,10);
-        if (columNb<7 && columNb>=0 && TableauDeP4[0][columNb].couleur == "vide")break;
+        int columnNb = stoi(columnStr,nullptr,10);
+        if (columnNb<7 && columnNb>=0 && TabP4[0][columnNb].color == "Empty"){
+            for(unsigned i = 0; i<6; i++){
+                if(TabP4[i][columnNb].color == "Empty"){
+                    TabP4[i][columnNb].color = "Red";
+                    return TabP4[i][columnNb];
+                }
+            }
+        }
         cout << "Le numéro entré n'est pas valide, réessayez !" << endl;
     }
+}
 
-    for(unsigned i = 0; i<6; i++){
-        if(TableauDeP4[i][columNb].couleur == "vide"){
-            TableauDeP4[i][columNb].couleur = "Red";
+
+cellP4 putYellowCoin(vector<vector<cellP4>> & TabP4){
+    while(true){
+        string columnStr = ask4UInput("Choisissez le numéro de la colonne choisie (de 0 à 6)");
+        int columnNb = stoi(columnStr,nullptr,10);
+        if (columnNb<7 && columnNb>=0 && TabP4[0][columnNb].color == "Empty"){
+            for(unsigned i = 0; i<6; i++){
+                if(TabP4[i][columnNb].color == "Empty"){
+                    TabP4[i][columnNb].color = "Yellow";
+                    return TabP4[i][columnNb];
+                }
+            }
         }
+        cout << "Le numéro entré n'est pas valide, réessayez !" << endl;
+    }
+}
+
+
+bool isVictoryRow(vector<vector<cellP4>> & TabP4, cellP4 & cell){
+    unsigned counter = 0;
+    for(unsigned i = 0; i<7; i++){
+        if(counter == 4) return true;
+        if(TabP4[cell.y][i].color == cell.color) counter++;
+        else counter = 0;
+    }
+    return false;
+}
+
+bool isVictoryColumn(vector<vector<cellP4>> & TabP4, cellP4 & cell){
+    unsigned counter = 0;
+    for(unsigned i = 0; i<6; i++){
+        if(counter == 4) return true;
+        if(TabP4[i][cell.x].color == cell.color) counter++;
+        else counter = 0;
+    }
+    return false;
+}
+
+bool isVictoryDiagonalDecrease(vector<vector<cellP4>> & TabP4, cellP4 & cell){
+    while(cell.y != 0 || cell.x != 0){
+        cell.y--;
+        cell.x--;
+    }
+    while(cell.y != 5 || cell.x != 6){
+
     }
 
+}
+
+bool isVictoryDiagonalIncrease(vector<vector<cellP4>> & TabP4, cellP4 & cell){
 
 }
+
+
+
+bool isVictoryDiagonals(vector<vector<cellP4>> & TabP4, cellP4 & cell){
+    if(isVictoryDiagonalDecrease(TabP4, cell) || isVictoryDiagonalIncrease(TabP4, cell)) return true;
+    else return false;
+}
+
+bool isVictory(vector<vector<cellP4>> & TabP4, cellP4 & cell){
+    if(isVictoryRow(TabP4, cell) || isVictoryColumn(TabP4, cell) || isVictoryDiagonals(TabP4, cell)) return true;
+    else return false;
+}
+
+
+
+
+
 
 
 
 
 
 //vector<caseP4> initP4 ???
-
 
 
 
