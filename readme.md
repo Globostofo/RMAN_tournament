@@ -134,7 +134,7 @@ string centerAlign(const string & txt, const unsigned & nb_char);
 #### 1.2.9 cuteLilBoard
 Affiche un tableau dans la console.
 ```cpp
-void cuteLilBoard(const vector<vector<string>> & content, const vector<char> & align, const bool & header=false);
+void cuteLilBoard(const vector<vector<string>> & content, const vector<char> & align={}, const bool & header=false);
 ```
 `content` est la liste des éléments du tableau. Exemple : `{ {"a", "b", "c"}, {"d", "e", "f"} }` fera un tableau comme celui-ci :
 ```
