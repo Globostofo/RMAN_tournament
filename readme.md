@@ -146,7 +146,7 @@ void cuteLilBoard(const vector<vector<string>> & content, const vector<char> & a
 | c | f |
 ---------
 ```
-`align` correspond à l'alignement dans chaque colonne (voir 1.2.6/1.2.7/1.2.8). Exemple : `{'r', 'l', 'c'}` fera un tableau comme celui-ci :
+`align` correspond à l'alignement dans chaque colonne (voir 1.2.6/1.2.7/1.2.8). Si le paramètre n'est pas renseigné, les colonnes seront centrées par défaut. Exemple : `{'r', 'l', 'c'}` fera un tableau comme celui-ci :
 ```
 ----------------------
 |    a | a    |  a   |
