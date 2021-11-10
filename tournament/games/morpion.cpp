@@ -17,13 +17,7 @@ Nicolas : Puissance 4
 Romain : Dames
 Antoine : Echecs
 
-
-
-#include <iostream>
-
-int main() {
-  std::cout << "Hello World!\n";
-}*/
+*/
 
 #include <stdio.h>
 #include <iostream>
