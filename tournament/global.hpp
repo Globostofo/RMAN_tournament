@@ -94,42 +94,54 @@ namespace global_func {
         return output;
     }
 
-    void cuteLilBoard(const vector<vector<string>> & content, const vector<char> & align, const bool & header=false) {
+    void cuteLilBoard(const vector<vector<string>> & content, const vector<char> & align={}, const bool & header=false) {
+        // Taille des colonnes (en caractere)
         vector<unsigned> colSize;
         for (unsigned i=0; i<content.size(); i++) {
             colSize.push_back(0);
             for (unsigned j=0; j<content[i].size(); j++) {
-                cout << content[i][j] << endl;
+                //cout << content[i][j] << endl;
                 if (content[i][j].size() > colSize[i]) {
                     colSize[i] = content[i][j].size();
                 }
             }
         }
+        // Largeur du tableau (en caractere)
         unsigned boardWidth=1;
         for (unsigned i=0; i<content.size(); i++) {
             boardWidth += colSize[i] + 3;
         }
+        // Barre horizontale
         string hBar;
         for (unsigned i=0; i<boardWidth; i++) {
             hBar += "-";
         }
 
-        cout << hBar << "\n|";
+        // Ecriture du tableau
         if (header) {
+            // Si on affiche on a une entête, alors on centre la première ligne
+            cout << hBar << "\n|";
             for (unsigned i=0; i<content.size(); i++) {
                 cout << " " << centerAlign(content[i][0], colSize[i]) << " |";
             }
             cout << endl << hBar;
         }
         for (unsigned i=header; i<content[0].size(); i++) {
+            // Pour chaque ligne (1ère inclue si on n'a pas de header, exlue si on en a un)
+            if (!header)
+                cout << endl << hBar;
             cout << "\n|";
             for (unsigned j=0; j<content.size(); j++) {
-                if (align[j] == 'l')
-                    cout << " " << leftAlign(content[j][i], colSize[j]) << " |";
-                else if (align[j] == 'r')
-                    cout << " " << rightAlign(content[j][i], colSize[j]) << " |";
-                else if (align[j] == 'c')
+                if (align.size() != 0) {
+                    if (align[j] == 'l')
+                        cout << " " << leftAlign(content[j][i], colSize[j]) << " |";
+                    else if (align[j] == 'r')
+                        cout << " " << rightAlign(content[j][i], colSize[j]) << " |";
+                    else if (align[j] == 'c')
+                        cout << " " << centerAlign(content[j][i], colSize[j]) << " |";
+                } else {
                     cout << " " << centerAlign(content[j][i], colSize[j]) << " |";
+                }
             }
         }
         cout << endl << hBar << endl;
