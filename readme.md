@@ -58,23 +58,28 @@ Contient le message à afficher lorsque le programme attend la validation de l'u
 ```cpp
 const string waitMsg;
 ```
-#### 1.1.3 MINTEAMS
+#### 1.1.3 inputErrMsg
+Contient le message à afficher lorsque le programme l'utilisateur fait une erreur dans sa saisie (mauvais type, en dehors des bornes...)
+```cpp
+const string inputErrMsg;
+```
+#### 1.1.4 MINTEAMS
 Contient le nombre minimum d'équipes que l'utilisateur choisit au début du tournoi.
 ```cpp
 const unsigned MINTEAMS;
 ```
-#### 1.1.4 MAXTEAMS
+#### 1.1.5 MAXTEAMS
 Contient le nombre maximum d'équipes que l'utilisateur choisit au début du tournoi.
 ```cpp
 const unsigned MAXTEAMS;
 ```
-#### 1.1.5 GAMESNAME
+#### 1.1.6 GAMESNAME
 Contient le nom de tous les jeux.
 ```cpp
 const vector<string> GAMESNAME;
 ```
-#### 1.1.6 NBGAMES
-Contient le nombre de jeux total, sa valeur est la longueur de `GAMESNAME` (1.1.5)
+#### 1.1.7 NBGAMES
+Contient le nombre de jeux total, sa valeur est la longueur de `GAMESNAME` (1.1.6)
 ```cpp
 const unsigned NBGAMES;
 ```
