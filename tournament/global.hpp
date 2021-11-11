@@ -8,6 +8,7 @@ namespace global_const {
     const string NAMESPATH = "../S101/tournament/students.txt";
 
     const string waitMsg = "Appuyez sur <ENTREE> pour continuer";
+    const string inputErrMsg = "La saisie n'est pas ecrite sous la forme attendue";
 
     const unsigned MINTEAMS = 2;
     const unsigned MAXTEAMS = 15;
