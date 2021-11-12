@@ -92,6 +92,44 @@ vector<piece> createChessboard() {
     return board;
 }
 
+vector<unsigned> getIndexWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & type, const char & color) {
+    vector<unsigned> possibilities;
+    if (type=='P') {
+        if (color=='w') {
+            if (chessboard[index-8].type=='P')
+                return index-8;
+            else if (16 <= index && index <= 23 && chessboard[index-16].type=='P')
+                return index-16;
+        } else if (color=='b') {
+            if (chessboard[index+8].type=='P')
+                return index+8;
+            else if (48 <= index && index <= 55 && chessboard[index+16].type=='P')
+                return index+16;
+        }
+    }
+    else if (type=='C') {
+        vector<int> toCheck = {-17, -15, -10, -6, 6, 10, 15, 17};
+        for (const int & value : toCheck) {
+            if (chessboard[index-value].type=='C') {
+                possibilities.push_back(index-value);
+            }
+        }
+    }
+    else if (type=='F') {
+
+    }
+    else if (type=='T') {
+
+    }
+    else if (type=='D') {
+
+    }
+    else if (type=='R') {
+
+    }
+    return possibilities;
+}
+
 unsigned checkEndGame(const vector<piece> & chessboard) {
     return 0;
 }
@@ -128,15 +166,15 @@ unsigned echecs(const string & t1, const string & t2) {
         bool correctInput = false;
         string answer;
         while (!correctInput) {
-            answer = ask4UInput("Le coup s'écrit sous la forme <init><c_dep><l_dep><c_arr><l_arr> (ex: Pe2e4) :\n");
-            if (answer.size() == 5) {
+            answer = ask4UInput("Le coup s'écrit sous la forme <init><colonne><ligne> (ex: Pe4) :\n");
+            char color;
+            if (!turn) color = 'w';
+            else color = 'b';
+            if (answer.size() == 3) {
                 char type = answer[0];
-                unsigned depIndex = 8*(answer[2]-'0'-1) + answer[1]-'a';
-                unsigned arrIndex = 8*(answer[4]-'0'-1) + answer[3]-'a';
+                unsigned arrIndex = 8*(answer[2]-'0'-1) + answer[1]-'a';
+                unsigned depIndex = getIndexWhoCanGoThere(chessboard, arrIndex, type, color);
                 if (chessboard[depIndex].type == type) {
-                    char color;
-                    if (!turn) color = 'w';
-                    else color = 'b';
                     if (chessboard[depIndex].color == color) {
                         chessboard[arrIndex] = chessboard[depIndex];
                         chessboard[depIndex] = piece {' ', ' '};
