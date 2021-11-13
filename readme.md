@@ -1,7 +1,7 @@
 # SAE 1.01 - RMAN Studio
 
 ## /!\ Message à l'attention des membres du groupe RMAN
-Pensez à lire ce document **en entier** pour pas réécrire 50 fois la même chose dans 50 fichiers différents. (question -> ping Globo dans le groupe Discord).  
+Pensez à lire ce document **en entier** pour pas réécrire 50 fois la même chose dans 50 fichiers différents. (question -> ping Globo sur le serveur Discord).  
 D'ailleurs si vous pouviez mettre à jour ce readme (notamment le 1. si vous ajoutez des trucs et le 3. dans la partie sur votre jeu) lorsque vous ajoutez des trucs c'est cool :)  
 Aussi, pensez à commenter votre code sinon Casali va venir vous tabasser chez vous cette nuit.
 
