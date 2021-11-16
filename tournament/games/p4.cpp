@@ -58,7 +58,7 @@ vector<vector<cellP4>> initP4(){
 
 
 
-//fusion des deux put ? doit renvoyer la position du dernier jeton ?
+//fusion des deux put ? doit renvoyer la position du dernier jeton (ou le jeton tout court) ?
 
 cellP4 putRedCoin(vector<vector<cellP4>> & TabP4){
     while(true){
@@ -94,7 +94,7 @@ cellP4 putYellowCoin(vector<vector<cellP4>> & TabP4){
 }
 
 
-bool isVictoryRow(vector<vector<cellP4>> & TabP4, cellP4 & cell){
+bool isVictoryRow(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
     unsigned counter = 0;
     for(unsigned i = 0; i<7; i++){
         if(counter == 4) return true;
@@ -104,7 +104,7 @@ bool isVictoryRow(vector<vector<cellP4>> & TabP4, cellP4 & cell){
     return false;
 }
 
-bool isVictoryColumn(vector<vector<cellP4>> & TabP4, cellP4 & cell){
+bool isVictoryColumn(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
     unsigned counter = 0;
     for(unsigned i = 0; i<6; i++){
         if(counter == 4) return true;
@@ -114,46 +114,70 @@ bool isVictoryColumn(vector<vector<cellP4>> & TabP4, cellP4 & cell){
     return false;
 }
 
-bool isVictoryDiagonalDecrease(vector<vector<cellP4>> & TabP4, cellP4 & cell){
-    while(cell.y != 0 || cell.x != 0){
-        cell.y--;
-        cell.x--;
-    }
-    while(cell.y != 5 || cell.x != 6){
+// mettre cell en const ?
 
+bool isVictoryDiagonalDecrease(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
+    unsigned x = cell.x;
+    unsigned y = cell.y;
+    while(y != 0 || x != 0){
+        y--;
+        x--;
     }
-
+    unsigned counter = 0;
+    while(y != 5 || x != 6){
+        if(counter == 4) return true;
+        if(TabP4[y][x].color == cell.color) counter++;
+        else counter = 0;
+        x++;
+        y++;
+    }
+    return false;
 }
 
-bool isVictoryDiagonalIncrease(vector<vector<cellP4>> & TabP4, cellP4 & cell){
-
+bool isVictoryDiagonalIncrease(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
+    unsigned x = cell.x;
+    unsigned y = cell.y;
+    while(y != 0 || x != 6){
+        y--;
+        x++;
+    }
+    unsigned counter = 0;
+    while(y != 5 || x != 0){
+        if(counter == 4) return true;
+        if(TabP4[y][x].color == cell.color) counter++;
+        else counter = 0;
+        y++;
+        x--;
+    }
+    return false;
 }
 
 
 
-bool isVictoryDiagonals(vector<vector<cellP4>> & TabP4, cellP4 & cell){
+bool isVictoryDiagonals(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
     if(isVictoryDiagonalDecrease(TabP4, cell) || isVictoryDiagonalIncrease(TabP4, cell)) return true;
     else return false;
 }
 
-bool isVictory(vector<vector<cellP4>> & TabP4, cellP4 & cell){
+bool isVictory(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
     if(isVictoryRow(TabP4, cell) || isVictoryColumn(TabP4, cell) || isVictoryDiagonals(TabP4, cell)) return true;
     else return false;
 }
 
 
+//modif init ?
+unsigned nomDuJeu(const string & t1, const string & t2) { //nom des équipes
 
+    unsigned winner; // 0 si t1 gagne, 1 si t2 gagne
+    initP4();
+    // votre jeu 
+    bool varTrue = true;
+    while(varTrue){
+        cellP4 cell = putRedCoin(TabP4);
+    }
 
-
-
-
-
-
-
-//vector<caseP4> initP4 ???
-
-
-
+    return winner;
+}
 
 
 
@@ -170,3 +194,4 @@ int main() {
     cout << "Hello World!\n";
     return 0;
 }*/
+
