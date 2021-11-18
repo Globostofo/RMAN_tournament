@@ -11,6 +11,7 @@ SOURCES += \
         tournament/games/morpion.cpp \
         tournament/games/p4.cpp \
         tournament/games/rock_paper_scissors.cpp \
+        tournament/games/Juste_prix.cpp \
         tournament/tournament.cpp
 
 HEADERS += \
