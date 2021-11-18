@@ -7,6 +7,8 @@
 #include "games/p4.cpp"
 #include "games/dames.cpp"
 #include "games/echecs.cpp"
+#include "games/rock_paper_scissors.cpp"
+#include "games/Juste_prix.cpp"
 
 using namespace global_const;
 using namespace global_func;

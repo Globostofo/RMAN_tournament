@@ -17,7 +17,9 @@ namespace global_const {
                                       "morpion",
                                       "puissance 4",
                                       "dames",
-                                      "echecs"};
+                                      "echecs",
+                                      "pierre feuille ciseaux",
+                                      "juste prix"};
     const unsigned NBGAMES = GAMESNAME.size();
 }
 
