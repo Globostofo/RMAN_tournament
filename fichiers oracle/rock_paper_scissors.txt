@@ -1,0 +1,37 @@
+tour 1:
+p1Choice -> feuille
+p2Choice -> ciseaux
++1 point pour t2
+0 - 1
+
+tour 2:
+p1Choice -> pierre
+p2Choice -> ciseaux
++1 point pour t1
+1 - 1
+
+tour 3:
+p1Choice -> feuille
+p2Choice -> pierre
++1 point pour t1
+2 - 1
+
+tour 4:
+p1Choice -> feuille
+p2Choice -> feuille
+égalité
+2 - 1
+
+tour 5:
+p1Choice -> ciseaux
+p2Choice -> pierre
++1 point pour t2
+2 - 2
+
+tour 5:
+p1Choice -> feuille
+p2Choice -> pierre
++1 point pour t1
+3 - 2
+
+victoire pour t1
