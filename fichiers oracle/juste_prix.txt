@@ -1,0 +1,23 @@
+Pour srand(1), max = 10
+
+Tour 1:
+b commence
+choisis 5
+Trop grand donc affiche "c'est moins"
+
+Tour 2:
+équipe a joue
+choisis 3
+Trop grand donc affiche "c'est moins"
+
+Tour 3:
+équipe b joue
+choisis 1
+Trop petit donc affiche "c'est plus"
+
+Tour 4:
+équipe a joue
+choisis 2
+bon nombre donc victoire de a
+
+renvoie 0, victoire de l'équipe t1
