@@ -23,6 +23,7 @@ Luke : Memory
 #include <iostream>
 #include <vector>
 #include <string>
+#include <random>
 
 using namespace global_const;
 using namespace global_func;
@@ -54,14 +55,16 @@ vector<vector<cellP4>> initP4(){
         }
         TabP4[i] = TempRow;
     }
+    return TabP4;
 }
 
 
 
 //fusion des deux put ? doit renvoyer la position du dernier jeton (ou le jeton tout court) ?
 
-cellP4 putRedCoin(vector<vector<cellP4>> & TabP4){
+cellP4 putRedCoin(vector<vector<cellP4>> & TabP4, const string & t2){
     while(true){
+        cout << "Équipe rouge " << t2 << endl;
         string columnStr = ask4UInput("Choisissez le numéro de la colonne choisie (de 0 à 6)");
         int columnNb = stoi(columnStr,nullptr,10);
         if (columnNb<7 && columnNb>=0 && TabP4[0][columnNb].color == "Empty"){
@@ -77,8 +80,9 @@ cellP4 putRedCoin(vector<vector<cellP4>> & TabP4){
 }
 
 
-cellP4 putYellowCoin(vector<vector<cellP4>> & TabP4){
+cellP4 putYellowCoin(vector<vector<cellP4>> & TabP4, const string & t1){
     while(true){
+        cout << "Équipe jaune " << t1 << endl;
         string columnStr = ask4UInput("Choisissez le numéro de la colonne choisie (de 0 à 6)");
         int columnNb = stoi(columnStr,nullptr,10);
         if (columnNb<7 && columnNb>=0 && TabP4[0][columnNb].color == "Empty"){
@@ -166,16 +170,33 @@ bool isVictory(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
 
 
 //modif init ?
-unsigned nomDuJeu(const string & t1, const string & t2) { //nom des équipes
-
+unsigned P4(const string & t1, const string & t2) { //nom des équipes
     unsigned winner; // 0 si t1 gagne, 1 si t2 gagne
-    initP4();
-    // votre jeu 
-    bool varTrue = true;
-    while(varTrue){
-        cellP4 cell = putRedCoin(TabP4);
+    vector<vector<cellP4>> TabP4 = initP4();
+    // votre jeu
+    cout << "L'équipe " << t1 << " est jaune."<< endl;
+    cout << "L'équipe " << t2 << " est rouge."<< endl;
+    cellP4 cell;
+    unsigned cpt = 0;
+    while(true){
+        cell = putYellowCoin(TabP4, t1);
+        if (isVictory(TabP4, cell)){
+            winner = 0;
+            break;
+        }
+        cpt++;
+        cell = putRedCoin(TabP4, t2);
+        if (isVictory(TabP4, cell)){
+            winner = 1;
+            break;
+        }
+        cpt++;
+        if (cpt  == 42){
+            cout << "Aucune équipe a gagné, recommencez." << endl;
+            cpt = 0;
+            TabP4 = initP4();
+        }
     }
-
     return winner;
 }
 
