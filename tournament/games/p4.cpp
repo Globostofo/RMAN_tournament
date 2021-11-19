@@ -59,6 +59,21 @@ vector<vector<cellP4>> initP4(){
 }
 
 
+//affiche le tableau de jeux en couleur
+void displayTabP4(const vector<vector<cellP4>> & TabP4){
+    cout << "0 1 2 3 4 5 6 " << endl << "--------------" << endl;
+    for(unsigned i=0; i<6; i++){
+        for(unsigned j=0; j<7; j++){
+            if(TabP4[i][j].color == "Empty") cout << "  ";
+            else if(TabP4[i][j].color == "Yellow") cout << "\033[43m  \033[00m";
+            else cout << "\033[41m  \033[00m";
+        }
+    }
+    cout << "--------------"<< endl << "0 1 2 3 4 5 6 "  << endl;
+}
+
+
+
 
 //fusion des deux put ? doit renvoyer la position du dernier jeton (ou le jeton tout court) ?
 
@@ -179,24 +194,29 @@ unsigned P4(const string & t1, const string & t2) { //nom des équipes
     cellP4 cell;
     unsigned cpt = 0;
     while(true){
+        displayTabP4(TabP4);
         cell = putYellowCoin(TabP4, t1);
         if (isVictory(TabP4, cell)){
             winner = 0;
+            cout << "L'équipe jaune " << t1 << "a gagné!" << endl;
             break;
         }
         cpt++;
+        displayTabP4(TabP4);
         cell = putRedCoin(TabP4, t2);
         if (isVictory(TabP4, cell)){
             winner = 1;
+            cout << "L'équipe rouge " << t2 << "a gagné!" << endl;
             break;
         }
         cpt++;
         if (cpt  == 42){
-            cout << "Aucune équipe a gagné, recommencez." << endl;
-            cpt = 0;
-            TabP4 = initP4();
+            winner = 2;
+            cout << "Aucune équipe a gagné, égalité!" << endl;
+            break;
         }
     }
+    displayTabP4(TabP4);
     return winner;
 }
 
@@ -215,4 +235,3 @@ int main() {
     cout << "Hello World!\n";
     return 0;
 }*/
-
