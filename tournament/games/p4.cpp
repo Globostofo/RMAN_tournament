@@ -51,8 +51,10 @@ vector<vector<cellP4>> initP4(){
             p.color = "Empty";
             p.x = j;
             p.y = i;
-            TempRow[j] = p;
+            TempRow.resize(TempRow.size()+1);
+            TempRow[j] = p; // le problème <--
         }
+        TabP4.resize(TabP4.size()+1);
         TabP4[i] = TempRow;
     }
     return TabP4;
@@ -68,6 +70,7 @@ void displayTabP4(const vector<vector<cellP4>> & TabP4){
             else if(TabP4[i][j].color == "Yellow") cout << "\033[43m  \033[00m";
             else cout << "\033[41m  \033[00m";
         }
+        cout << endl;
     }
     cout << "--------------"<< endl << "0 1 2 3 4 5 6 "  << endl;
 }
@@ -77,13 +80,23 @@ void displayTabP4(const vector<vector<cellP4>> & TabP4){
 
 //fusion des deux put ? doit renvoyer la position du dernier jeton (ou le jeton tout court) ?
 
-cellP4 putRedCoin(vector<vector<cellP4>> & TabP4, const string & t2){
+//----------------------------- à finir --------------------------------------
+
+int testIfGoodNumber(){
     while(true){
+        string columnStr = ask4UInput("Choisissez le numéro de la colonne choisie (de 0 à 6)\n");
+        if(columnStr == "0" || columnStr == "1" || columnStr == "2" || columnStr == "3" || columnStr == "4" || columnStr == "5" || columnStr == "6"){
+            return stoi(columnStr);
+        }
+        else cout << "le numéro entré n'a pas été reconnu ! Réessayez.";
+    }
+}
+
+cellP4 putRedCoin(vector<vector<cellP4>> & TabP4, const string & t2){
         cout << "Équipe rouge " << t2 << endl;
-        string columnStr = ask4UInput("Choisissez le numéro de la colonne choisie (de 0 à 6)");
-        int columnNb = stoi(columnStr,nullptr,10);
+        int columnNb = testIfGoodNumber();
         if (columnNb<7 && columnNb>=0 && TabP4[0][columnNb].color == "Empty"){
-            for(unsigned i = 0; i<6; i++){
+            for(unsigned i = 5; i>=0; i--){
                 if(TabP4[i][columnNb].color == "Empty"){
                     TabP4[i][columnNb].color = "Red";
                     return TabP4[i][columnNb];
@@ -91,17 +104,13 @@ cellP4 putRedCoin(vector<vector<cellP4>> & TabP4, const string & t2){
             }
         }
         cout << "Le numéro entré n'est pas valide, réessayez !" << endl;
-    }
 }
 
-
 cellP4 putYellowCoin(vector<vector<cellP4>> & TabP4, const string & t1){
-    while(true){
         cout << "Équipe jaune " << t1 << endl;
-        string columnStr = ask4UInput("Choisissez le numéro de la colonne choisie (de 0 à 6)");
-        int columnNb = stoi(columnStr,nullptr,10);
+        int columnNb = testIfGoodNumber();
         if (columnNb<7 && columnNb>=0 && TabP4[0][columnNb].color == "Empty"){
-            for(unsigned i = 0; i<6; i++){
+            for(unsigned i = 5; i>=0; i--){
                 if(TabP4[i][columnNb].color == "Empty"){
                     TabP4[i][columnNb].color = "Yellow";
                     return TabP4[i][columnNb];
@@ -109,9 +118,8 @@ cellP4 putYellowCoin(vector<vector<cellP4>> & TabP4, const string & t1){
             }
         }
         cout << "Le numéro entré n'est pas valide, réessayez !" << endl;
-    }
 }
-
+// ---------------------------------------------------
 
 bool isVictoryRow(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
     unsigned counter = 0;
@@ -138,12 +146,12 @@ bool isVictoryColumn(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
 bool isVictoryDiagonalDecrease(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
     unsigned x = cell.x;
     unsigned y = cell.y;
-    while(y != 0 || x != 0){
+    while(not(y == 0 || x == 0)){
         y--;
         x--;
     }
     unsigned counter = 0;
-    while(y != 5 || x != 6){
+    while(not(y == 5 || x == 6)){
         if(counter == 4) return true;
         if(TabP4[y][x].color == cell.color) counter++;
         else counter = 0;
@@ -156,12 +164,12 @@ bool isVictoryDiagonalDecrease(const vector<vector<cellP4>> & TabP4, const cellP
 bool isVictoryDiagonalIncrease(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
     unsigned x = cell.x;
     unsigned y = cell.y;
-    while(y != 0 || x != 6){
+    while(not(y == 0 || x == 6)){
         y--;
         x++;
     }
     unsigned counter = 0;
-    while(y != 5 || x != 0){
+    while(not(y == 5 || x == 0)){
         if(counter == 4) return true;
         if(TabP4[y][x].color == cell.color) counter++;
         else counter = 0;
@@ -185,7 +193,7 @@ bool isVictory(const vector<vector<cellP4>> & TabP4, const cellP4 & cell){
 
 
 //modif init ?
-unsigned P4(const string & t1, const string & t2) { //nom des équipes
+unsigned p4(const string & t1, const string & t2) { //nom des équipes
     unsigned winner; // 0 si t1 gagne, 1 si t2 gagne
     vector<vector<cellP4>> TabP4 = initP4();
     // votre jeu
@@ -198,7 +206,8 @@ unsigned P4(const string & t1, const string & t2) { //nom des équipes
         cell = putYellowCoin(TabP4, t1);
         if (isVictory(TabP4, cell)){
             winner = 0;
-            cout << "L'équipe jaune " << t1 << "a gagné!" << endl;
+            displayTabP4(TabP4);
+            cout << "L'équipe jaune " << t1 << " a gagné!" << endl;
             break;
         }
         cpt++;
@@ -206,17 +215,18 @@ unsigned P4(const string & t1, const string & t2) { //nom des équipes
         cell = putRedCoin(TabP4, t2);
         if (isVictory(TabP4, cell)){
             winner = 1;
-            cout << "L'équipe rouge " << t2 << "a gagné!" << endl;
+            displayTabP4(TabP4);
+            cout << "L'équipe rouge " << t2 << " a gagné!" << endl;
             break;
         }
         cpt++;
         if (cpt  == 42){
             winner = 2;
-            cout << "Aucune équipe a gagné, égalité!" << endl;
+            displayTabP4(TabP4);
+            cout << "Aucune équipe n'a gagné, égalité!" << endl;
             break;
         }
     }
-    displayTabP4(TabP4);
     return winner;
 }
 
