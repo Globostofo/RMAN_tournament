@@ -4,17 +4,17 @@
 #include <ctime>
 using namespace std;
 
-bool Guessing_game(const string & t1, const string & t2){
+bool Guessing_game(const string & t1, const string & t2){                   //le juste prix
     unsigned p1Choice = 0;
-    unsigned p2Choice = 0;
+    unsigned p2Choice = 0;                                                  // initialisation des variables
     unsigned max = 0;
     unsigned start;
     bool winner;
-    srand(time(nullptr));
+    srand(time(nullptr));                                                   // initialisation du random
     cout << "definissez un maximum (unsigned) : ";
-    cin >> max;
-    unsigned guess = rand() % max + 1;
-    if (rand() % 2 == 0){
+    cin >> max;                                                             //choix du maximum
+    unsigned guess = rand() % max + 1;                                      //génération du nombre à trouver
+    if (rand() % 2 == 0){                                                   //choix aléatoire du joueur qui commence
             cout << endl << "equipe " + t1 + ", commencez" << endl;
             start = 0;
         }
@@ -22,11 +22,11 @@ bool Guessing_game(const string & t1, const string & t2){
             cout << endl << "equipe " + t2 + ", commencez" << endl;
             start = 1;
         }
-    while(true){
+    while(true){                                                             //boucle du jeu
         if (start == 0){
             cout << endl << "equipe " + t1 +  " choisissez un nombre entre 1 et " << max << endl;
             cin >> p1Choice;
-            if (p1Choice > max){
+            if (p1Choice > max){                                             //conditions indiquant la victoire ou un indice sur le nombre à trouver pour le joueur 1
                 cout << "un nombre entre 1 et " << max << ", Tour suivant" << endl;
             }
             else if (p1Choice > guess){
@@ -41,10 +41,10 @@ bool Guessing_game(const string & t1, const string & t2){
                 break;
             }
         }
-        else if (start == 1){
+        else if (start == 1){               
             cout << endl << "equipe " + t2 + " choisissez un nombre entre 1 et " << max << endl;
             cin >> p2Choice;
-            if (p2Choice > max){
+            if (p2Choice > max){                                             //conditions indiquant la victoire ou un indice sur le nombre à trouver pour le joueur 2
                 cout << "un nombre entre 1 et " << max << ", Tour suivant" << endl;
             }
             else if (p2Choice > guess){
@@ -59,7 +59,7 @@ bool Guessing_game(const string & t1, const string & t2){
                 break;
             }
         }
-        start = (start + 1) % 2;
+        start = (start + 1) % 2;                                             //permet de changer de joueur à chaque tour
     }
-    return winner;
+    return winner;                                                           //renvoie l'équipe ayant deviné le nombre
 }
