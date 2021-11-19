@@ -2,23 +2,23 @@
 #include <iostream>
 using namespace std;
 
-bool rock_paper_scissors(const string & t1, const string & t2){
+bool rock_paper_scissors(const string & t1, const string & t2){     //pierre feuille ciseaux
     string p1Choice = "";
     string p2Choice = "";
+    bool winner;
+    unsigned p1Points = 0;                                          //initialisation des variables
+    unsigned p2Points = 0;                               
     unsigned max;
     cout << "combien de points pour gagner ? ";
-    cin >> max;
-    bool winner;
-    unsigned p1Points = 0;
-    unsigned p2Points = 0;
-    while (p1Points < max && p2Points < max){
+    cin >> max;                                                     //définition d'un maximum de points
+    while ((p1Points < max) && (p2Points < max)){                   //corps du jeu
         cout << endl << t1 + " choisissez entre pierre, feuille et ciseaux : ";
-        cin >> p1Choice;
+        cin >> p1Choice;                                            //choix des deux joueurs sur quoi jouer
         cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << t2 + " choisissez entre pierre, feuille et ciseaux : ";
         cin >> p2Choice;
         cout << p1Choice + " contre " + p2Choice << endl;
         if ((p1Choice == "feuille" && p2Choice == "pierre") || (p1Choice == "pierre" && p2Choice == "ciseaux") || (p1Choice == "ciseaux" && p2Choice == "feuille")){
-            cout << "l'equipe " + t1 + " gagne cette manche" << endl;
+            cout << "l'equipe " + t1 + " gagne cette manche" << endl;                               //conditions permettant de déterminer qui gagne un point
             p1Points++;
             cout << 'p1Points' + " a " + 'p2Points' << endl;
         }
@@ -34,7 +34,7 @@ bool rock_paper_scissors(const string & t1, const string & t2){
             cout << "entrer pierre, feuille ou ciseaux" << endl;
         }
     }
-    if(p1Points == 3){
+    if(p1Points == max){                                            //annonce de l'équipe gagnante et détermination de winner
         cout << "La victoire reviens a l'equipe " + t1;
         winner = 0;
     }
@@ -42,5 +42,5 @@ bool rock_paper_scissors(const string & t1, const string & t2){
         cout << "La victoire reviens a l'equipe " + t2;
         winner = 1;
     }
-    return winner;
+    return winner;                                                  //renvoie l'équipe gagnante
 }
