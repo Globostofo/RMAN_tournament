@@ -5,13 +5,11 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp \
-        tournament/games/dames.cpp \
         tournament/games/echecs.cpp \
         tournament/games/memory.cpp \
         tournament/games/morpion.cpp \
         tournament/games/p4.cpp \
         tournament/games/rock_paper_scissors.cpp \
-        tournament/games/Juste_prix.cpp \
         tournament/tournament.cpp
 
 HEADERS += \
@@ -21,4 +19,5 @@ HEADERS += \
 DISTFILES += \
     readme.md \
     tournament/NOTAMOAMEM.md \
-    tournament/students.txt
+    tournament/students.txt \
+    tournament/memory.txt
