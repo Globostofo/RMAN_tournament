@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "../global.hpp"
 
 using namespace std;
@@ -11,9 +12,9 @@ struct piece {
     char color;
 };
 
-void dispChessboard(const vector<piece> & chessboard, const bool & reversed=false) {
+void displayChessboard(const vector<piece> & chessboard, const bool & reversed=false) {
 
-    auto dispCell = [](const vector<piece> & chessboard, const unsigned & index, bool & posColor) {
+    auto dispCell = [](const vector<piece> & chessboard, const short & index, bool & posColor) {
         piece p = chessboard[index];
         string cell = "1m" + string (1, p.type) + " \033[0m";
         if (posColor) {
@@ -36,9 +37,9 @@ void dispChessboard(const vector<piece> & chessboard, const bool & reversed=fals
     if (!reversed) {
         colName = "  a b c d e f g h";
         cout << colName << endl;
-        for (unsigned line=8; line>=1; line--) {
+        for (short line=8; line>=1; line--) {
             cout << line << " ";
-            for (unsigned col=1; col<=8; col++) {
+            for (short col=1; col<=8; col++) {
                 dispCell(chessboard, 8*(line-1)+col-1, posColor);
             }
             cout << " " << line << endl;
@@ -47,9 +48,9 @@ void dispChessboard(const vector<piece> & chessboard, const bool & reversed=fals
     } else {
         colName = "  h g f e d c b a";
         cout << colName << endl;
-        for (unsigned line=1; line<=8; line++) {
+        for (short line=1; line<=8; line++) {
             cout << line << " ";
-            for (unsigned col=8; col>=1; col--) {
+            for (short col=8; col>=1; col--) {
                 dispCell(chessboard, 8*(line-1)+col-1, posColor);
             }
             cout << " " << line << endl;
@@ -83,7 +84,7 @@ vector<piece> createChessboard() {
 
     board = pushPiecesLine(board, 'w');
     board = pushPawnsLine(board, 'w');
-    for (unsigned i=0; i<(4*8); i++) {
+    for (short i=0; i<(4*8); i++) {
         board.push_back(piece{' ', ' '});
     }
     board = pushPawnsLine(board, 'b');
@@ -92,252 +93,223 @@ vector<piece> createChessboard() {
     return board;
 }
 
-vector<unsigned> getPiecesIndexes(const vector<piece> & chessboard, const char & type, const char & color) {
-    vector<unsigned> indexes;
-    for (unsigned i=0; i<chessboard.size(); ++i) {
+vector<short> getPiecesIndexes(const vector<piece> & chessboard, const char & type, const char & color) {
+    vector<short> indexes;
+    for (short i=0; i<(short)chessboard.size(); ++i) {
         if (chessboard[i].type == type && chessboard[i].color == color)
             indexes.push_back(i);
     }
     return indexes;
 }
 
-vector<unsigned> getPawnsIndexesWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
-    // Cherche le(s) pion(s) de couleur <color> qui peut(peuvent) aller sur la case d'indice <index>
-    vector<unsigned> possibilities;
+vector<short> getKingRange(const short & index) {
+    vector<short> inRange;
+    if (index%8 > 0) {
+        if (index-9 >= 0) inRange.push_back(-9);
+        inRange.push_back(-1);
+        if (index+7 <= 63) inRange.push_back(7);
+    }
+    if (index-8>=0) inRange.push_back(-8);
+    if (index+8<=63) inRange.push_back(8);
+    if (index%8 < 7) {
+        if (index-7 >= 0) inRange.push_back(-7);
+        inRange.push_back(1);
+        if (index+9 <= 63) inRange.push_back(9);
+    }
+    return inRange;
+}
 
-    if (color=='w') {                                                                                           // Si la piece recherchee doit etre blanche
-        if (chessboard[index].type==' ') {                                                                          // Si la case d'indice <index> est vide
-            if (chessboard[index-8].type=='P' && chessboard[index-8].color=='w') possibilities.push_back(index-8);      // Si la case du dessous contient un pion blanc
-            else if (24 <= index && index <= 31 && chessboard[index-16].type=='P' && chessboard[index-16].color=='w')   // Sinon si la case encore en dessous est sur la ligne 2 et qu'elle contient un pion blanc
-                possibilities.push_back(index-16);
-        } else if (chessboard[index].color=='b') {                                                                  // Si la case d'indice <index> contient une piece noire
-            if (chessboard[index-9].type=='P' && chessboard[index-9].color=='w') possibilities.push_back(index-9);      // Si la case en dessous a gauche est un pion blanc
-            if (chessboard[index-7].type=='P' && chessboard[index-7].color=='w') possibilities.push_back(index-7);      // Si la case en dessous a droite est un pion blanc
+vector<short> getPossibilitiesByDirection(const vector<piece> & chessboard, const short & index, const char & color, const vector<short> & directions) {
+    vector<short> possibilities;
+    short curr_loc;
+    for (const short & direction : directions) {
+        curr_loc = index + direction;
+        while (chessboard[curr_loc].color!=color && curr_loc>=0 && curr_loc<=63) {
+            possibilities.push_back(curr_loc);
+            if (chessboard[curr_loc].color!=' ' || curr_loc%8==0 || curr_loc%8==7) break;
+            curr_loc += direction;
         }
+    }
+    return possibilities;
+}
 
-    } else if (color=='b') {                                                                                    // Sinon si la piece recherchee doit etre noire
-        if (chessboard[index].type==' ') {                                                                         // Si la case d'indice <index> est vide
-            if (chessboard[index+8].type=='P' && chessboard[index+8].color=='b') possibilities.push_back(index+8);      // Si la case du dessus contient un pion noir
-            else if (32 <= index && index <= 47 && chessboard[index+16].type=='P' && chessboard[index+16].color=='b')   // Sinon si la case encore au dessus est sur la ligne 7 et qu'elle contient un pion noir
+vector<short> getPawnMoves(const vector<piece> & chessboard, const short & index, const char & c) {
+    vector<short> possibilities;
+    if (c == 'w') {
+        if (chessboard[index+8].type == ' ') {
+            possibilities.push_back(index+8);
+            if (8<=index && index<=15 && chessboard[index+16].type==' ')
                 possibilities.push_back(index+16);
-        } else if (chessboard[index].color=='w') {                                                                  // Si la case d'indice <index> contient une piece blanche
-            if (chessboard[index+7].type=='P' && chessboard[index+7].color=='b') possibilities.push_back(index+7);      // Si la case au dessus a gauche est un pion noir
-            if (chessboard[index+9].type=='P' && chessboard[index+9].color=='b') possibilities.push_back(index+9);      // Si la case au dessus a droite est un pion noir
         }
+        if (index%8!=0 && chessboard[index+7].color=='b') possibilities.push_back(index+7);
+        if (index%8!=7 && chessboard[index+9].color=='b') possibilities.push_back(index+9);
+    }
+
+    else if (c == 'b') {
+        if (chessboard[index-8].type == ' ') {
+            possibilities.push_back(index-8);
+            if (48<=index && index<=55 && chessboard[index-16].type==' ')
+                possibilities.push_back(index-16);
+        }
+        if (index%8!=0 && chessboard[index-9].color=='w') possibilities.push_back(index-9);
+        if (index%8!=7 && chessboard[index-7].color=='w') possibilities.push_back(index-7);
     }
 
     return possibilities;
 }
 
-vector<unsigned> getKnightsIndexesWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
-    // Cherche le(s) cavalier(s) de couleur <color> qui peut(peuvent) aller sur la case d'indice <index>
-    vector<unsigned> possibilities;
+vector<short> getKnightMoves(const vector<piece> & chessboard, const short & index, const char & c) {
+    vector<short> possibilities;
 
     vector<short> toCheck;
-    if (index%8 != 0) {
-        if ((int) index-17 >= 0) toCheck.push_back(-17);
+    if (index%8 > 0) {
+        if (index-17 >= 0) toCheck.push_back(-17);
         if (index+15 <= 63) toCheck.push_back(15);
     }
     if (index%8 > 1) {
-        if ((int) index-10 >= 0) toCheck.push_back(-10);
+        if (index-10 >= 0) toCheck.push_back(-10);
         if (index+6 <= 63) toCheck.push_back(6);
     }
-    if (index%8 != 7) {
-        if ((int) index-15 >= 0) toCheck.push_back(-15);
+    if (index%8 < 7) {
+        if (index-15 >= 0) toCheck.push_back(-15);
         if (index+17 <= 63) toCheck.push_back(17);
     }
     if (index%8 < 6) {
-        if ((int) index-6 >= 0) toCheck.push_back(-6);
+        if (index-6 >= 0) toCheck.push_back(-6);
         if (index+10 <= 63) toCheck.push_back(10);
     }
 
-    for (const short & value : toCheck) {                                                                         // Pour chaque case <c> qui rend accessible la case d'indice <index> a un cavalier de couleur <color>
-        if (chessboard[index+value].type=='C' && chessboard[index+value].color==color)                              // Si <c> contient un cavalier de couleur <color>
+    for (const short & value : toCheck) {
+        if (chessboard[index+value].color != c)
             possibilities.push_back(index+value);
     }
 
     return possibilities;
 }
 
-vector<unsigned> getBishopsIndexesWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
-    // Cherche le fou de couleur <color> qui peut aller sur la case d'indice <index>
-    vector<unsigned> possibilities;
+vector<short> getBishopMoves(const vector<piece> & chessboard, const short & index, const char & c) {
+    vector<short> possibilities;
 
-    for (int i=index-9; i>=0; i-=9) {                                                                             // Pour chaque case <c> en diagonale bas-gauche de la case d'indice <index>
-        if (chessboard[i].type=='F' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient un fou de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (int i=index-7; i>=0; i-=7) {                                                                        // Pour chaque case <c> en diagonale bas-droite de la case d'indice <index>
-        if (chessboard[i].type=='F' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient un fou de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (int i=index+7; i<=63; i+=7) {                                                                       // Pour chaque case <c> en diagonale haut-gauche de la case d'indice <index>
-        if (chessboard[i].type=='F' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient un fou de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (int i=index+9; i<=63; i+=9) {                                                                            // Pour chaque case <c> en diagonale haut-droite de la case d'indice <index>
-        if (chessboard[i].type=='F' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient un fou de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
+    for (const short & p : getPossibilitiesByDirection(chessboard, index, c, {-9, -7, 7, 9})) {
+        possibilities.push_back(p);
     }
 
     return possibilities;
 }
 
-vector<unsigned> getRooksIndexesWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
-    // Cherche la(les) tour(s) de couleur <color> qui peut(peuvent) aller sur la case d'indice <index>
-    vector<unsigned> possibilities;
+vector<short> getRookMoves(const vector<piece> & chessboard, const short & index, const char & c) {
+    vector<short> possibilities;
 
-    for (int i=index-8; i>=0; i-=8) {                                                                             // Pour chaque case <c> en dessous de la case d'indice <index>
-        if (chessboard[i].type=='T' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient une tour de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (unsigned i=index-1; i>=index-index%8; i--) {                                                             // Pour chaque case <c> a gauche de la case d'indice <index>
-        if (chessboard[i].type=='T' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient une tour de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (unsigned i=index+1; i<=index+(7-index%8); i++) {                                                         // Pour chaque case <c> a droite de la case d'indice <index>
-        if (chessboard[i].type=='T' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient une tour de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (int i=index+8; i<=63; i+=8) {                                                                            // Pour chaque case <c> au dessus de la case d'indice <index>
-        if (chessboard[i].type=='T' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient une tour de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
+    for (const short & p : getPossibilitiesByDirection(chessboard, index, c, {-8, -1, 1, 8})) {
+        possibilities.push_back(p);
     }
 
     return possibilities;
 }
 
-vector<unsigned> getQueensIndexesWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
-    // Cherche la(les) dame(s) de couleur <color> qui peut(peuvent) aller sur la case d'indice <index>
-    vector<unsigned> possibilities;
+vector<short> getQueenMoves(const vector<piece> & chessboard, const short & index, const char & c) {
+    vector<short> possibilities;
 
-    for (int i=index-9; i>=0; i-=9) {                                                                             // Pour chaque case <c> en diagonale bas-gauche de la case d'indice <index>
-        if (chessboard[i].type=='D' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient un fou de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (int i=index-8; i>=0; i-=8) {                                                                             // Pour chaque case <c> en dessous de la case d'indice <index>
-        if (chessboard[i].type=='D' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient une tour de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (int i=index-7; i>=0; i-=7) {                                                                        // Pour chaque case <c> en diagonale bas-droite de la case d'indice <index>
-        if (chessboard[i].type=='D' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient un fou de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (unsigned i=index-1; i>=index-index%8; i--) {                                                             // Pour chaque case <c> a gauche de la case d'indice <index>
-        if (chessboard[i].type=='D' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient une tour de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (unsigned i=index+1; i<=index+(7-index%8); i++) {                                                         // Pour chaque case <c> a droite de la case d'indice <index>
-        if (chessboard[i].type=='D' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient une tour de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (int i=index+7; i<=63; i+=7) {                                                                       // Pour chaque case <c> en diagonale haut-gauche de la case d'indice <index>
-        if (chessboard[i].type=='D' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient un fou de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (int i=index+8; i<=63; i+=8) {                                                                            // Pour chaque case <c> au dessus de la case d'indice <index>
-        if (chessboard[i].type=='D' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient une tour de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
-    }
-    for (int i=index+9; i<=63; i+=9) {                                                                            // Pour chaque case <c> en diagonale haut-droite de la case d'indice <index>
-        if (chessboard[i].type=='D' && chessboard[i].color==color) possibilities.push_back(i);                      // Si <c> contient un fou de couleur <color>
-        else if (chessboard[i].type!=' ') break;                                                                    // Sinon si <c> n'est pas vide
+    for (const short & p : getPossibilitiesByDirection(chessboard, index, c, {-9, -8, -7, -1, 1, 7, 8, 9})) {
+        possibilities.push_back(p);
     }
 
     return possibilities;
 }
 
-vector<unsigned> getKingIndexWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
-    // Cherche si le roi de couleur <color> peut aller sur la case d'indice <index>
-    vector<unsigned> possibilities;
-
-    vector<short> toCheck;
-    if (index%8 != 0) {
-        if ((int) index-9 >= 0) toCheck.push_back(-9);
-        toCheck.push_back(-1);
-        if (index+7 <= 63) toCheck.push_back(7);
-    }
-    if ((int) index-8 >= 0) toCheck.push_back(-8);
-    if (index+8 <= 63) toCheck.push_back(8);
-    if (index%8 != 7) {
-        if ((int) index-7 >= 0) toCheck.push_back(-7);
-        toCheck.push_back(1);
-        if (index+9 <= 63) toCheck.push_back(9);
-    }
-
-    for (const short & value : toCheck) {                                                                         // Pour chaque case <c> qui rend accessible la case d'indice <index> au roi de couleur <color>
-        if (chessboard[index+value].type=='R' && chessboard[index+value].color==color)                              // Si <c> contient le roi de couleur <color>
-            possibilities.push_back(index-value);
-    }
-
-    return possibilities;
-}
-
-vector<unsigned> getIndexesOfTypeWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & type, const char & color) {
-    if (type=='P')
-        return getPawnsIndexesWhoCanGoThere(chessboard, index, color);
-    else if (type=='C')
-        return getKnightsIndexesWhoCanGoThere(chessboard, index, color);
-    else if (type=='F')
-        return getBishopsIndexesWhoCanGoThere(chessboard, index, color);
-    else if (type=='T')
-        return getRooksIndexesWhoCanGoThere(chessboard, index, color);
-    else if (type=='D')
-        return getQueensIndexesWhoCanGoThere(chessboard, index, color);
-    else if (type=='R')
-        return getKingIndexeWhoCanGoThere(chessboard, index, color);
-}
-
-vector<unsigned> getIndexesWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
-    vector<unsigned> possibilities;
-    for (const unsigned & value : getPawnsIndexesWhoCanGoThere(chessboard, index, color)) possibilities.push_back(value);
-    for (const unsigned & value : getKnightsIndexesWhoCanGoThere(chessboard, index, color)) possibilities.push_back(value);
-    for (const unsigned & value : getBishopsIndexesWhoCanGoThere(chessboard, index, color)) possibilities.push_back(value);
-    for (const unsigned & value : getRooksIndexesWhoCanGoThere(chessboard, index, color)) possibilities.push_back(value);
-    for (const unsigned & value : getQueensIndexesWhoCanGoThere(chessboard, index, color)) possibilities.push_back(value);
-    for (const unsigned & value : getKingIndexeWhoCanGoThere(chessboard, index, color)) possibilities.push_back(value);
-    return possibilities;
-}
-
-vector<unsigned> isInCheck(const vector<piece> & chessboard, const char & color, const char & enemyColor) {
-    /// Fonction qui verifie si le roi <color> est en echec
-    unsigned kingIndex = getPiecesIndexes(chessboard, 'R', color)[0];
-    return getIndexesWhoCanGoThere(chessboard, kingIndex, enemyColor);
-}
-
-bool isMat(const vector<piece> & chessboard, const char & color, const char & enemyColor) {
-    /// Fonction qui verifie si l'equipe <color> a perdu la partie
-    unsigned kingIndex = getPiecesIndexes(chessboard, 'R', color)[0];
-    vector<unsigned> attackers = isInCheck(chessboard, enemyColor, color);
-
-    if (!attackers.size())
-        // Si l'equipe n'est pas en echec
-        return false;
-
-    if (getKingIndexWhoCanGoThere(chessboard, kingIndex, color).size())
-        // Si le roi peut bouger
-        return false;
-
-    if
+bool isAttacked(const vector<piece> & chessboard, const short & index, const char & color) {
+    /// Fonction qui verifie si la case d'indice <index> est attaquee par une piece de couleur <color>
+    for (const short & pawnI   : getPiecesIndexes(chessboard, 'P', color))
+        for (const short & moveI : getPawnMoves  (chessboard, pawnI,   color)) if (moveI == index) return true;
+    for (const short & knightI : getPiecesIndexes(chessboard, 'C', color))
+        for (const short & moveI : getKnightMoves(chessboard, knightI, color)) if (moveI == index) return true;
+    for (const short & bishopI : getPiecesIndexes(chessboard, 'F', color))
+        for (const short & moveI : getBishopMoves(chessboard, bishopI, color)) if (moveI == index) return true;
+    for (const short & rookI   : getPiecesIndexes(chessboard, 'T', color))
+        for (const short & moveI : getRookMoves  (chessboard, rookI,   color)) if (moveI == index) return true;
+    for (const short & queenI  : getPiecesIndexes(chessboard, 'D', color))
+        for (const short & moveI : getQueenMoves (chessboard, queenI,  color)) if (moveI == index) return true;
+    for (const short & moveI : getKingRange(getPiecesIndexes(chessboard, 'R', color)[0]))
+        if (moveI == index) return true;
 
     return false;
 }
 
-unsigned echecs(const string & t1, const string & t2) {
+vector<short> getKingMoves(const vector<piece> & chessboard, const short & index, const char & c) {
+    vector<short> possibilities;
 
-    vector<string> teams;
-    if (rand()%2 == 0) {
-        teams = {t1, t2};
-    } else {
-        teams = {t2, t1};
-    }
+    vector<short> toCheck = getKingRange(index);
+
+    char enemyC = 'w';
+    if (c == 'w') enemyC = 'b';
+
+    for (const short & value : toCheck) {
+        if (chessboard[index+value].color!=c && !isAttacked(chessboard, index+value, enemyC))
+            possibilities.push_back(index+value);}
+
+    return possibilities;
+}
+
+vector<short> getPieceMoves(const vector<piece> & chessboard, const short & index) {
+    char t = chessboard[index].type;
+    char c = chessboard[index].color;
+
+    if      (t == 'P') return getPawnMoves(chessboard, index, c);
+    else if (t == 'C') return getKnightMoves(chessboard, index, c);
+    else if (t == 'F') return getBishopMoves(chessboard, index, c);
+    else if (t == 'T') return getRookMoves(chessboard, index, c);
+    else if (t == 'D') return getQueenMoves(chessboard, index, c);
+    else if (t == 'R') return getKingMoves(chessboard, index, c);
+}
+
+bool isMat(const vector<piece> & chessboard, const char & color, const char & enemyColor) {
+    /// Fonction qui verifie si l'equipe <color> a perdu la partie
+    short kingIndex = getPiecesIndexes(chessboard, 'R', color)[0];
+
+    if (!isAttacked(chessboard, color, enemyColor))
+        // Si le roi n'est pas en echec
+        return false;
+
+    if (getPieceMoves(chessboard, kingIndex).size())
+        // Si le roi peut bouger
+        return false;
+
+    return false;
+}
+
+bool isDraw(const vector<piece> & chessboard, const char & color, const char & enemyColor) {
+    /// Fonction qui verifie s'il y a egalite
+
+    auto getRemainingPieces = [](const vector<piece> & chessboard, const char & color) {
+        string pieces;
+        for (const piece & p : chessboard)
+            if (p.color == color) pieces += p.type;
+        sort(pieces.begin(), pieces.end());
+        return pieces;
+    };
+
+    string wPieces = getRemainingPieces(chessboard, 'w');
+    string bPieces = getRemainingPieces(chessboard, 'b');
+    if ((wPieces=="R" && (bPieces=="R" || bPieces=="CR" || bPieces=="FR")) ||
+        (bPieces=="R" && (wPieces=="CR" || wPieces=="FR"))) return true;
+
+
+
+    return false;
+}
+
+short echecs(const string & t1, const string & t2) {
+
+    // Choix aleatoire des couleurs
+    vector<string> teams = {t1, t2};
+    if (rand()%2 == 0) teams = {t2, t1};
     vector<string> colors = {"blancs", "noirs"};
     bool turn = false;
     cout << "L'equipe " << teams[0] << " joue avec les blancs." << endl
          << "L'equipe " << teams[1] << " joue avec les noirs." << endl;
     pressEnter();
 
-    cout << "Pour un gameplay plus agreable, vous pouvez modifier les couleurs par defaut du terminal pour les faire correspondre aux couleurs classiques d'un echiquier :" << endl
+    cout << "Pour un gameplay plus agreable dans la console, vous pouvez modifier les couleurs par defaut du terminal pour les faire correspondre aux couleurs classiques d'un echiquier :" << endl
          << "Pieces blanches : #FFF" << endl
          << "Cases blanches  : #E0C18C" << endl
          << "Pieces noires   : #000" << endl
@@ -347,9 +319,10 @@ unsigned echecs(const string & t1, const string & t2) {
     // Creation des pieces
     vector<piece> chessboard = createChessboard();
 
+    // Boucle principale du jeu
     while (true) {
         // Affichage des instructions
-        dispChessboard(chessboard, turn);
+        displayChessboard(chessboard, turn);
         cout << endl << "Trait aux " << colors[turn] << endl
              << "Equipe " << teams[turn] << ", a vous de jouer !" << endl;
 
@@ -361,76 +334,51 @@ unsigned echecs(const string & t1, const string & t2) {
         while (!correctInput) {
 
             // Demande d'un coup a l'utilisateur
-            answer = ask4UInput("Le coup s'écrit sous la forme <init><colonne><ligne> (ex: Pe4) :\n");
+            answer = ask4UInput("Le coup s'ecrit sous la forme <col_dep><lin_dep> <col_arr><lin_arr> (ex e2 e4) :\n");
 
-            if (answer.size() == 3) {           // Sous la forme <init><col><ligne>
-                char type = answer[0];
-                unsigned arrIndex = 8*(answer[2]-'0'-1) + answer[1]-'a';
-                vector<unsigned> depIndex = getIndexOfTypeWhoCanGoThere(chessboard, arrIndex, type, color);
-
-                if (depIndex.size() == 0) {         // Pas de possibilite
-                    cout << "Erreur dans la saisie, aucune piece ne peut atteindre la case selectionnee" << endl;
+            if (answer.size() == 2) {           // Sous la forme <col><ligne>
+                short index = 8*(answer[1]-'0'-1) + answer[0]-'a';
+                if (chessboard[index].color!=color) {
+                    cout << inputErrMsg << endl << endl;
+                    continue;
                 }
-
-                else if (depIndex.size() == 1) {    // Une possibilite
-
-                    // On place temporairement la piece a la nouvelle place pour verifier si le coup met en echec
-                    chessboard[arrIndex] = chessboard[depIndex[0]];
-                    chessboard[depIndex[0]] = piece {' ', ' '};
-
-                    if (!isInCheck(chessboard, color, enemyColor))
-                        // On valide le coup
-                        correctInput = !correctInput;
-                    else {
-                        // On annule le coup
-                        chessboard[depIndex[0]] = chessboard[arrIndex];
-                        chessboard[arrIndex] = piece {' ', ' '};
-                        cout << "Vous etes en echec" << endl;
-                    }
-                }
-
-                else {                              // Trop de possibilites (demande de precision)
-                    cout << "Plusieurs pieces peuvent atteindre cette case, veuillez etre plus precis en utilisant la forme <init><depart><arrivee> (ex: <init><col_d><lin_d><col_a><lin_a>)" << endl;
-                }
-                cout << endl;
+                vector<short> p = getPieceMoves(chessboard, index);
+                cout << p.size() << endl;
+                for (const short & i : p)
+                    cout << i << endl;
             }
 
-            else if (answer.size() == 5) {      // Sous la forme <init><col_d><lin_d><col_a><lin_a>
-                char type = answer[0];
-                unsigned depIndex = 8*(answer[2]-'0'-1) + answer[1]-'a';
-                unsigned arrIndex = 8*(answer[4]-'0'-1) + answer[3]-'a';
+            else if (answer.size() == 5) {      // Sous la forme <col_dep><lin_dep> <col_arr><lin_arr>
+                short depIndex = 8*(answer[1]-'0'-1) + answer[0]-'a';
+                short arrIndex = 8*(answer[4]-'0'-1) + answer[3]-'a';
 
-                for (const unsigned & index : getIndexOfTypeWhoCanGoThere(chessboard, arrIndex, type, color))
-                    if (index == depIndex) {
+                if (chessboard[depIndex].color!=color) {
+                    cout << inputErrMsg << endl << endl;
+                    continue;
+                }
 
-                        // On place temporairement la piece a la nouvelle place pour verifier su le coup met en echec
+                for (const short & index : getPieceMoves(chessboard, depIndex))
+                    if (index == arrIndex) {
                         chessboard[arrIndex] = chessboard[depIndex];
                         chessboard[depIndex] = piece {' ', ' '};
-
-                        if (!isInCheck(chessboard, color, enemyColor))
-                            // On valide le coup
-                            correctInput = ! correctInput;
-                        else {
-                            // On annule le coup
-                            chessboard[depIndex] = chessboard[arrIndex];
-                            chessboard[arrIndex] = piece {' ', ' '};
-                            cout << "Vous etes en echec" << endl;
-                        }
-
-                        break;
+                        correctInput = ! correctInput;
                     }
             }
 
-            else {
-                cout << inputErrMsg << endl;
-            }
+            else
+                cout << inputErrMsg << endl << endl;
         }
 
         // Verification de mat et de pat
-        isMat(chessboard, enemyColor, color);
+        if (isMat(chessboard, enemyColor, color)) {
+            cout << "Echec et mat !" << endl
+                 << "L'equipe " << teams[turn] << "gagne la partie et encaisse 2 points" << endl;
+            return turn;
+        } else if (isDraw(chessboard, enemyColor, color)) {
+            cout << "Pat !" << endl
+                 << "Les equipes font egalite et encaissent 1 point chaucune" << endl;
+        }
 
         turn = !turn;
     }
-
-    return turn;
 }
