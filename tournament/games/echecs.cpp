@@ -247,7 +247,7 @@ vector<unsigned> getQueensIndexesWhoCanGoThere(const vector<piece> & chessboard,
     return possibilities;
 }
 
-vector<unsigned> getKingIndexeWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
+vector<unsigned> getKingIndexWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
     // Cherche si le roi de couleur <color> peut aller sur la case d'indice <index>
     vector<unsigned> possibilities;
 
@@ -273,7 +273,7 @@ vector<unsigned> getKingIndexeWhoCanGoThere(const vector<piece> & chessboard, co
     return possibilities;
 }
 
-vector<unsigned> getIndexOfTypeWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & type, const char & color) {
+vector<unsigned> getIndexesOfTypeWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & type, const char & color) {
     if (type=='P')
         return getPawnsIndexesWhoCanGoThere(chessboard, index, color);
     else if (type=='C')
@@ -288,7 +288,7 @@ vector<unsigned> getIndexOfTypeWhoCanGoThere(const vector<piece> & chessboard, c
         return getKingIndexeWhoCanGoThere(chessboard, index, color);
 }
 
-vector<unsigned> getIndexWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
+vector<unsigned> getIndexesWhoCanGoThere(const vector<piece> & chessboard, const unsigned & index, const char & color) {
     vector<unsigned> possibilities;
     for (const unsigned & value : getPawnsIndexesWhoCanGoThere(chessboard, index, color)) possibilities.push_back(value);
     for (const unsigned & value : getKnightsIndexesWhoCanGoThere(chessboard, index, color)) possibilities.push_back(value);
@@ -299,18 +299,27 @@ vector<unsigned> getIndexWhoCanGoThere(const vector<piece> & chessboard, const u
     return possibilities;
 }
 
-bool isInCheck(const vector<piece> & chessboard, const char & color) {
+vector<unsigned> isInCheck(const vector<piece> & chessboard, const char & color, const char & enemyColor) {
     /// Fonction qui verifie si le roi <color> est en echec
     unsigned kingIndex = getPiecesIndexes(chessboard, 'R', color)[0];
-    char enemyColor = 'w';
-    if (color == 'w') enemyColor = 'b';
-    int temp = getIndexWhoCanGoThere(chessboard, kingIndex, enemyColor).size();
-    cout << temp << endl;
-    return temp;
+    return getIndexesWhoCanGoThere(chessboard, kingIndex, enemyColor);
 }
 
-bool isMat(const vector<piece> & chessboard, const char & color) {
+bool isMat(const vector<piece> & chessboard, const char & color, const char & enemyColor) {
     /// Fonction qui verifie si l'equipe <color> a perdu la partie
+    unsigned kingIndex = getPiecesIndexes(chessboard, 'R', color)[0];
+    vector<unsigned> attackers = isInCheck(chessboard, enemyColor, color);
+
+    if (!attackers.size())
+        // Si l'equipe n'est pas en echec
+        return false;
+
+    if (getKingIndexWhoCanGoThere(chessboard, kingIndex, color).size())
+        // Si le roi peut bouger
+        return false;
+
+    if
+
     return false;
 }
 
@@ -347,13 +356,12 @@ unsigned echecs(const string & t1, const string & t2) {
         // Gestion de l'entree utilisateur
         bool correctInput = false;
         string answer;
+        char color='w', enemyColor='b';
+        if (turn) color = 'b', enemyColor='w';
         while (!correctInput) {
 
             // Demande d'un coup a l'utilisateur
             answer = ask4UInput("Le coup s'écrit sous la forme <init><colonne><ligne> (ex: Pe4) :\n");
-            char color;
-            if (!turn) color = 'w';
-            else color = 'b';
 
             if (answer.size() == 3) {           // Sous la forme <init><col><ligne>
                 char type = answer[0];
@@ -370,7 +378,7 @@ unsigned echecs(const string & t1, const string & t2) {
                     chessboard[arrIndex] = chessboard[depIndex[0]];
                     chessboard[depIndex[0]] = piece {' ', ' '};
 
-                    if (!isInCheck(chessboard, color))
+                    if (!isInCheck(chessboard, color, enemyColor))
                         // On valide le coup
                         correctInput = !correctInput;
                     else {
@@ -399,7 +407,7 @@ unsigned echecs(const string & t1, const string & t2) {
                         chessboard[arrIndex] = chessboard[depIndex];
                         chessboard[depIndex] = piece {' ', ' '};
 
-                        if (!isInCheck(chessboard, color))
+                        if (!isInCheck(chessboard, color, enemyColor))
                             // On valide le coup
                             correctInput = ! correctInput;
                         else {
@@ -417,6 +425,9 @@ unsigned echecs(const string & t1, const string & t2) {
                 cout << inputErrMsg << endl;
             }
         }
+
+        // Verification de mat et de pat
+        isMat(chessboard, enemyColor, color);
 
         turn = !turn;
     }
