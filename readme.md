@@ -25,7 +25,7 @@ Ce programme C++ simule un tournoi.
 	- Morpion
 	- Puissance 4
 	- Echecs
-	- Pierre Feuille ciseaux
+	- Pierre feuille ciseaux
 	- Juste prix
 
 ## 1. L'accès global
