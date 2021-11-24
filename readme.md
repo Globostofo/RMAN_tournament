@@ -174,33 +174,56 @@ void cuteLilBoard(const vector<vector<string>> & content, const vector<char> & a
 
 ## 2. Le tournoi
 
-### Exemple :
-Supposons que nous nous trouvons dans le fichier `.../file01.cpp` et que nous voulons utiliser une fonction qui se trouve dans le fichier `.../file02.cpp`, il suffit d'ajouter la ligne suivant dans le fichier `.../file01.cpp` :
+### 2.1 Création des joueurs
+Au début du tournoi, le nom de chaque joueur est récupéré depuis le fichier `students.txt`. Par la suite, on crée une liste qui contient l'intégralité des joueurs grace à la structure de donnée définie par :
 ```cpp
-#include "./file02.cpp"
+struct player {
+    string last_name;	// Nom de famille
+    string first_name;	// Prénom
+};
 ```
 
-/!\ A faire
+### 2.2 Création des équipes
+Lors de la création des équipes, l'utilisateur renseigne d'abord le nombre d'équipes qui participent au tournoi, ainsi le programme éjecte aléatoirement des joueurs qui sont de trop, si le nombre de joueurs n'est pas un multiple du nombre d'équipes.  
+Ensuite, l'utilisateur saisi au fur et à mesure le nom des équipes tout en voyant quel joueur a été placé dans quel équipe (les joueurs sont regroupés aléatoirement). Pour ce faire, on utilise la structure de donnée d'équipe qui prend la forme :
+```cpp
+struct team {
+    string name;		// Nom de l'équipe
+    unsigned points;		// Nombre de points
+    vector<player> players;	// Tableau des joueurs de l'équipe
+};
+```
+(NB: les équipes sont stockées dans un tableau de type `vector<team>`)
+
+### 2.3 Matchmaking
+La partie du matchmaking est assez simple puisqu'il s'agit simplement d'une fonction qui permet de regrouper les équipes 2 par 2 à partir de la liste préalablement triée par nombre de points des équipes. Cette fonction transforme le tableau d'équipes de type `vector<team>` en tableau de tableaux d'équipes de type `vector<vector<team>>`, ainsi chaque tableau du tableau a pour longueur 2  
+(NB: si on a un nombre impaire d'équipes, le dernier tableau du tableau a une longueur de 1)
+
+### 2.4 Rencontres des équipes
+Pour lancer une rencontre, il faut au préalable avoir récupéré un tableau de tableau d'équipes (avec la fonction de `matchmaking` (2.3)). Ainsi, quelque soit le jeu qui est lancé, on appelle la fonction correspondante qui prend pour paramètre le nom des deux équipes qui participent à la rencontre.  
+Puis, il suffit de réitérer l'appel de la fonction pour chaque tableau du tableau de matchmaking pour faire en sorte que chaque équipe joue sa rencontre. On notera que si la dernière rencontre est une équipe seule, elle est exmptée et gagne automatiquement 1 point.  
+La dernière étape est d'ajouter les points à l'équipe gagnante de chaque rencontre (réponse de la fonction du mini-jeu) de la manière suivante, si une équipe gagne la rencontre, elle marque 2 points, si elle perd elle n'en marque aucun et si les équipes dont égalité dans la rencontre (possible dans certains cas tels que le morpion, le puissance 4 ou encore les échecs) les deux équipes marquent 1 point chacune.
+
 
 
 ## 3. Les jeux
 Chaque programme renvoie soit 0 pour annoncer la victoire de l'équipe désignée comme équipe 1, 1 pour annoncer la victoire de l'équipe désignée en équipe 2 et 2 si jamais il y a une égalité.
 
-### Memory
+### 3.1 Memory
 
-### Morpion
+### 3.2 Morpion
 
-### Puissance 4
+### 3.3 Puissance 4
 
-### Echecs
+### 3.4 Echecs
 Le mini-jeu d'échec reprend les règles basiques du jeu d'échec.  
 Le fonctionnement du jeu se fait au travers de plusieurs étapes qui sont les suivantes :
 	- 
 
-### Pierre feuille ciseaux
+### 3.5 Pierre feuille ciseaux
 Le but du jeu est simple. Il faut essayer de gagner en choississant l'une des possibilités qui sont la pierre, qui gagne contre les ciseaux, la feuille qui gagne contre la pierre et les ciseaux qui gagnent contre la feuille. La première équipe à arriver au score max définit au début de la partie gagne.  
 Le programme fonctionne de sorte à ce que chaque combinaisons possibles soit prises en compte (victoire pour un des deux, égalité ou réessayer si jamais le choix n'est pas dans les choix proposés).
 
-### Juste prix
+### 3.6 Juste prix
 Le but de ce jeu est de trouver le nombre généré aléatoirement entre 1 et un maximum choisis avant son adversaire.  
 L'équipe qui commence est sélectionné de manière aléatoire et commence la partie. Le programme renverra "c'est plus" si le nombre mystère est plus grand, "c'est moins" si le nombre mystère est plus petit, "bravo" si le nombre a été trouvé ou "un nombre entre 1 et 'max'" si jamais le nombre entré par une équipe est en dehors de l'intervalle. Ensuite l'autre équipe fait une proposition et le jeu continue jusqu'à ce que quelqu'un trouve le nombre. La première équipe à trouver le nombre mystère gagne.
