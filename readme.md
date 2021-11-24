@@ -1,10 +1,5 @@
 # SAE 1.01 - RMAN Studio
 
-## /!\ Message à l'attention des membres du groupe RMAN
-Pensez à lire ce document **en entier** pour pas réécrire 50 fois la même chose dans 50 fichiers différents. (question -> ping Globo sur le serveur Discord).  
-D'ailleurs si vous pouviez mettre à jour ce readme (notamment le 1. si vous ajoutez des trucs et le 3. dans la partie sur votre jeu) lorsque vous ajoutez des trucs c'est cool :)  
-Aussi, pensez à commenter votre code sinon Casali va venir vous tabasser chez vous cette nuit.
-
 
 ## Introduction
 Ce programme C++ simule un tournoi.
@@ -141,7 +136,7 @@ Affiche un tableau dans la console.
 ```cpp
 void cuteLilBoard(const vector<vector<string>> & content, const vector<char> & align={}, const bool & header=false);
 ```
-`content` est la liste des éléments du tableau. Exemple : `{ {"a", "b", "c"}, {"d", "e", "f"} }` fera un tableau comme celui-ci :
+`content` est la liste des éléments du tableau. Exemple : `{{"a", "b", "c"}, {"d", "e", "f"}}` fera un tableau comme celui-ci :
 ```
 ---------
 | a | d |
@@ -188,15 +183,22 @@ Supposons que nous nous trouvons dans le fichier `.../file01.cpp` et que nous vo
 /!\ A faire
 
 
-3. ## Les jeux
+## 3. Les jeux
    Chaque programme renvoie soit 0 pour annoncer la victoire de l'équipe désignée comme équipe 1, 1 pour annoncer la victoire de l'équipe désignée en équipe 2 et 2 si jamais il y a une égalité.
-   - ### Memory
-   - ### Morpion
-   - ### Puissance 4
-   - ### Echecs
-   - ### Pierre feuille ciseaux
-      Le but du jeu est simple. Il faut essayer de gagner en choississant l'une des possibilités qui sont la pierre, qui gagne contre les ciseaux, la feuille qui gagne contre la pierre et les ciseaux qui gagnent contre la feuille. La première équipe à arriver au score max définit au début de la partie gagne.
-	  Le programme fonctionne de sorte à ce que chaque combinaisons possibles soit prises en compte (victoire pour un des deux, égalité ou réessayer si jamais le choix n'est pas dans les choix proposés).
-   - ### Juste prix
-      Le but de ce jeu est de trouver le nombre généré aléatoirement entre 1 et un maximum choisis avant son adversaire.
-	  L'équipe qui commence est sélectionné de manière aléatoire et commence la partie. Le programme renverra "c'est plus" si le nombre mystère est plus grand, "c'est moins" si le nombre mystère est plus petit, "bravo" si le nombre a été trouvé ou "un nombre entre 1 et 'max'" si jamais le nombre entré par une équipe est en dehors de l'intervalle. Ensuite l'autre équipe fait une proposition et le jeu continue jusqu'à ce que quelqu'un trouve le nombre. La première équipe à trouver le nombre mystère gagne.
+
+### Memory
+
+### Morpion
+
+### Puissance 4
+
+### Echecs
+Le mini-jeu d'échec reprend les règles 
+
+### Pierre feuille ciseaux
+Le but du jeu est simple. Il faut essayer de gagner en choississant l'une des possibilités qui sont la pierre, qui gagne contre les ciseaux, la feuille qui gagne contre la pierre et les ciseaux qui gagnent contre la feuille. La première équipe à arriver au score max définit au début de la partie gagne.  
+Le programme fonctionne de sorte à ce que chaque combinaisons possibles soit prises en compte (victoire pour un des deux, égalité ou réessayer si jamais le choix n'est pas dans les choix proposés).
+
+### Juste prix
+Le but de ce jeu est de trouver le nombre généré aléatoirement entre 1 et un maximum choisis avant son adversaire.  
+L'équipe qui commence est sélectionné de manière aléatoire et commence la partie. Le programme renverra "c'est plus" si le nombre mystère est plus grand, "c'est moins" si le nombre mystère est plus petit, "bravo" si le nombre a été trouvé ou "un nombre entre 1 et 'max'" si jamais le nombre entré par une équipe est en dehors de l'intervalle. Ensuite l'autre équipe fait une proposition et le jeu continue jusqu'à ce que quelqu'un trouve le nombre. La première équipe à trouver le nombre mystère gagne.
