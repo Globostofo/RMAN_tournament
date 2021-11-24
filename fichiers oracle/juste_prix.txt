@@ -1,23 +1,22 @@
-Pour srand(1), max = 10
+(srand(1))
+definissez un maximum (unsigned) : 
 
-Tour 1:
-b commence
-choisis 5
-Trop grand donc affiche "c'est moins"
+equipe t2, commencez
 
-Tour 2:
-équipe a joue
-choisis 3
-Trop grand donc affiche "c'est moins"
+equipe t2 choisissez un nombre entre 1 et 100
+c'est moins
 
-Tour 3:
-équipe b joue
-choisis 1
-Trop petit donc affiche "c'est plus"
+equipe t1 choisissez un nombre entre 1 et 100
+c'est plus
 
-Tour 4:
-équipe a joue
-choisis 2
-bon nombre donc victoire de a
+equipe t2 choisissez un nombre entre 1 et 100
+c'est plus
 
-renvoie 0, victoire de l'équipe t1
+equipe t1 choisissez un nombre entre 1 et 100
+c'est moins
+
+equipe t1 choisissez un nombre entre 1 et 100
+c'est moins
+
+equipe t2 choisissez un nombre entre 1 et 100
+Bravo ! La victoire reviens a l'equipe t2 !

@@ -10,7 +10,7 @@ bool Guessing_game(const string & t1, const string & t2){                   //le
     unsigned max = 0;
     unsigned start;
     bool winner;
-    srand(time(nullptr));                                                   // initialisation du random
+    srand(1);                                                   // initialisation du random
     cout << "definissez un maximum (unsigned) : ";
     cin >> max;                                                             //choix du maximum
     unsigned guess = rand() % max + 1;                                      //génération du nombre à trouver

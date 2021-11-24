@@ -1,37 +1,162 @@
-tour 1:
-p1Choice -> feuille
-p2Choice -> ciseaux
-+1 point pour t2
-0 - 1
+combien de points pour gagner ? 5
 
-tour 2:
-p1Choice -> pierre
-p2Choice -> ciseaux
-+1 point pour t1
-1 - 1
+t1 choisissez entre pierre, feuille et ciseaux : 
 
-tour 3:
-p1Choice -> feuille
-p2Choice -> pierre
-+1 point pour t1
-2 - 1
 
-tour 4:
-p1Choice -> feuille
-p2Choice -> feuille
-égalité
-2 - 1
 
-tour 5:
-p1Choice -> ciseaux
-p2Choice -> pierre
-+1 point pour t2
-2 - 2
 
-tour 5:
-p1Choice -> feuille
-p2Choice -> pierre
-+1 point pour t1
-3 - 2
 
-victoire pour t1
+
+
+
+
+
+
+
+
+
+t2 choisissez entre pierre, feuille et ciseaux : 
+feuille contre ciseaux
+l'equipe t2 gagne cette manche
+0 a 1
+
+t1 choisissez entre pierre, feuille et ciseaux : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+t2 choisissez entre pierre, feuille et ciseaux : 
+ciseaux contre pierre
+l'equipe t2 gagne cette manche
+0 a 2
+
+t1 choisissez entre pierre, feuille et ciseaux : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+t2 choisissez entre pierre, feuille et ciseaux : 
+pierre contre feuille
+l'equipe t2 gagne cette manche
+0 a 3
+
+t1 choisissez entre pierre, feuille et ciseaux : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+t2 choisissez entre pierre, feuille et ciseaux : 
+feuille contre ciseaux
+l'equipe t2 gagne cette manche
+0 a 4
+
+t1 choisissez entre pierre, feuille et ciseaux : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+t2 choisissez entre pierre, feuille et ciseaux : 
+pierre contre ciseaux
+l'equipe t1 gagne cette manche
+1 a 4
+
+t1 choisissez entre pierre, feuille et ciseaux : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+t2 choisissez entre pierre, feuille et ciseaux : 
+pierre contre ciseaux
+l'equipe t1 gagne cette manche
+2 a 4
+
+t1 choisissez entre pierre, feuille et ciseaux : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+t2 choisissez entre pierre, feuille et ciseaux : 
+feuille contre pierre
+l'equipe t1 gagne cette manche
+3 a 4
+
+t1 choisissez entre pierre, feuille et ciseaux : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+t2 choisissez entre pierre, feuille et ciseaux : 
+ciseaux contre pierre
+l'equipe t2 gagne cette manche
+3 a 5
+La victoire reviens a l'equipe t2

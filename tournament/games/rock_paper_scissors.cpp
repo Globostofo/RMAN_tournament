@@ -14,18 +14,18 @@ bool rock_paper_scissors(const string & t1, const string & t2){     //pierre feu
     while ((p1Points < max) && (p2Points < max)){                   //corps du jeu
         cout << endl << t1 + " choisissez entre pierre, feuille et ciseaux : ";
         cin >> p1Choice;                                            //choix des deux joueurs sur quoi jouer
-        cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << t2 + " choisissez entre pierre, feuille et ciseaux : ";
+        cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << t2 + " choisissez entre pierre, feuille et ciseaux : ";
         cin >> p2Choice;
         cout << p1Choice + " contre " + p2Choice << endl;
         if ((p1Choice == "feuille" && p2Choice == "pierre") || (p1Choice == "pierre" && p2Choice == "ciseaux") || (p1Choice == "ciseaux" && p2Choice == "feuille")){
             cout << "l'equipe " + t1 + " gagne cette manche" << endl;                               //conditions permettant de déterminer qui gagne un point
             p1Points++;
-            cout << 'p1Points' + " a " + 'p2Points' << endl;
+            cout << p1Points + " a " + p2Points << endl;
         }
         else if((p2Choice == "feuille" && p1Choice == "pierre") || (p2Choice == "pierre" && p1Choice == "ciseaux") || (p2Choice == "ciseaux" && p1Choice == "feuille")){
             cout << "l'equipe " + t2 + " gagne cette manche" << endl;
             p2Points++;
-            cout << 'p1Points' << " a " << 'p2Points' << endl;
+            cout << p1Points << " a " << p2Points << endl;
         }
         else if(p1Choice == p2Choice){
             cout << "egalite" << endl;

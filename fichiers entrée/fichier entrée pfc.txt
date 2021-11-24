@@ -1,0 +1,17 @@
+5
+feuille
+ciseaux
+ciseaux
+pierre
+pierre
+feuille
+feuille
+ciseaux
+pierre
+ciseaux
+pierre
+ciseaux
+feuille
+pierre
+ciseaux
+pierre
