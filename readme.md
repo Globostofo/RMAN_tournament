@@ -184,7 +184,7 @@ Supposons que nous nous trouvons dans le fichier `.../file01.cpp` et que nous vo
 
 
 ## 3. Les jeux
-   Chaque programme renvoie soit 0 pour annoncer la victoire de l'équipe désignée comme équipe 1, 1 pour annoncer la victoire de l'équipe désignée en équipe 2 et 2 si jamais il y a une égalité.
+Chaque programme renvoie soit 0 pour annoncer la victoire de l'équipe désignée comme équipe 1, 1 pour annoncer la victoire de l'équipe désignée en équipe 2 et 2 si jamais il y a une égalité.
 
 ### Memory
 
@@ -193,7 +193,9 @@ Supposons que nous nous trouvons dans le fichier `.../file01.cpp` et que nous vo
 ### Puissance 4
 
 ### Echecs
-Le mini-jeu d'échec reprend les règles 
+Le mini-jeu d'échec reprend les règles basiques du jeu d'échec.  
+Le fonctionnement du jeu se fait au travers de plusieurs étapes qui sont les suivantes :
+	- 
 
 ### Pierre feuille ciseaux
 Le but du jeu est simple. Il faut essayer de gagner en choississant l'une des possibilités qui sont la pierre, qui gagne contre les ciseaux, la feuille qui gagne contre la pierre et les ciseaux qui gagnent contre la feuille. La première équipe à arriver au score max définit au début de la partie gagne.  
