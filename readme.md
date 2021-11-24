@@ -189,13 +189,13 @@ Supposons que nous nous trouvons dans le fichier `.../file01.cpp` et que nous vo
 
 
 3. ## Les jeux
-   Chaque programme renvoie soit 0 pour annoncer la victoire de l'équipe désignée comme équipe 1 et 1 pour annoncer la victoire de l'équipe désignée en équipe 2.
+   Chaque programme renvoie soit 0 pour annoncer la victoire de l'équipe désignée comme équipe 1, 1 pour annoncer la victoire de l'équipe désignée en équipe 2 et 2 si jamais il y a une égalité.
    - ### Memory
    - ### Morpion
    - ### Puissance 4
    - ### Echecs
    - ### Pierre feuille ciseaux
-      Le but du jeu est simple. Il faut essayer de gagner en choississant l'une des possibilités qui sont pierre, qui gagne contre les ciseaux, la feuille qui gagne contre la pierre et les ciseaux qui gagnent contre la feuille. La première équipe à arriver au score max définit au début de la partie gagne.
+      Le but du jeu est simple. Il faut essayer de gagner en choississant l'une des possibilités qui sont la pierre, qui gagne contre les ciseaux, la feuille qui gagne contre la pierre et les ciseaux qui gagnent contre la feuille. La première équipe à arriver au score max définit au début de la partie gagne.
 	  Le programme fonctionne de sorte à ce que chaque combinaisons possibles soit prises en compte (victoire pour un des deux, égalité ou réessayer si jamais le choix n'est pas dans les choix proposés).
    - ### Juste prix
       Le but de ce jeu est de trouver le nombre généré aléatoirement entre 1 et un maximum choisis avant son adversaire.
