@@ -1,5 +1,5 @@
-L'équipe 1 est jaune.
-L'équipe 2 est rouge.
+L'équipe  est jaune.
+L'équipe  est rouge.
  0  1  2  3  4  5  6 
 ----------------------
 |  |  |  |  |  |  |  |
@@ -15,7 +15,7 @@ L'équipe 2 est rouge.
 |  |  |  |  |  |  |  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe jaune 1
+Équipe jaune 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -29,10 +29,10 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | J|  |  |  |  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe rouge 2
+Équipe rouge 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -46,10 +46,10 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J|  |  |  |  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe jaune 1
+Équipe jaune 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -63,10 +63,10 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J|  |  | J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe rouge 2
+Équipe rouge 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -78,12 +78,12 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R|  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J|  |  | J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe jaune 1
+Équipe jaune 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -95,12 +95,12 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R|  |  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J|  |  | J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe rouge 2
+Équipe rouge 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -112,12 +112,12 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R|  |  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R|  | J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe jaune 1
+Équipe jaune 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -127,14 +127,14 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  |  |  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R|  |  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R|  | J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe rouge 2
+Équipe rouge 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -142,16 +142,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  |  |  | R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  |  |  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R|  |  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R|  | J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe jaune 1
+Équipe jaune 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -159,16 +159,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  |  |  | R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  |  |  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R| J|  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R|  | J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe rouge 2
+Équipe rouge 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -176,16 +176,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  |  |  | R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R|  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R| J|  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R|  | J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe jaune 1
+Équipe jaune 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -193,16 +193,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  |  |  | R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R|  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R| J|  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| J| J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe rouge 2
+Équipe rouge 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -210,16 +210,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R|  | R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R|  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R| J|  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| J| J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe jaune 1
+Équipe jaune 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -227,16 +227,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R|  | R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R|  | J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R| J| J| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| J| J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe rouge 2
+Équipe rouge 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -244,16 +244,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R|  | R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R| R| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R| J| J| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| J| J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe jaune 1
+Équipe jaune 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -261,16 +261,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R| J| R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R| R| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | R| J| J| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| J| J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe rouge 2
+Équipe rouge 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -278,16 +278,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R| J| R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R| R| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| R| J| J| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| J| J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe jaune 1
+Équipe jaune 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
 le numéro entré n'a pas été reconnu ! Réessayez.
 Choisissez le numéro de la colonne choisie (de 0 à 6)
@@ -297,16 +297,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R| J| R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  | J| R| R| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| R| J| J| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| J| J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe rouge 2
+Équipe rouge 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -314,16 +314,16 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  |  |  | R| J| R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| R| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| R| J| J| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| J| J|  |
 ----------------------
  0  1  2  3  4  5  6 
-Équipe jaune 1
+Équipe jaune 
 Choisissez le numéro de la colonne choisie (de 0 à 6)
  0  1  2  3  4  5  6 
 ----------------------
@@ -331,15 +331,14 @@ Choisissez le numéro de la colonne choisie (de 0 à 6)
 ----------------------
 |  |  |  |  |  |  |  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | J|  | R| J| R|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| R| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| R| J| J| J|  |
 ----------------------
-|  |  |  |  |  |  |  |
+|  | R| J| R| J| J|  |
 ----------------------
  0  1  2  3  4  5  6 
-L'équipe jaune 1 a gagné!
-L'equipe 1 gagne 1 point
-
+L'équipe jaune  a gagné!
+L'equipe  gagne 1 point
