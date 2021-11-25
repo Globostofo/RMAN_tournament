@@ -72,7 +72,7 @@ void placePawn() { //Place un pion aux coordonnées indiquées par l'utilisateur
         cin >> column;
         cout << endl;
         if ((row > 0) && (row <= ROW) && (column > 0) && (column <= COLUMN)) {
-            --row;
+            --row;          // enleve 1 pour etre compatible avec le tableau ayant des indices de 0 à ROW-1
             --column;
             if (grid[row][column] != VOID) {
                 cout << "Cette case contient déjà un pion. Veuillez réessayer : " << endl << endl;
@@ -80,11 +80,11 @@ void placePawn() { //Place un pion aux coordonnées indiquées par l'utilisateur
             else {
                 correctEntry = true;
                 grid[row][column] = (valGrid)nextPlayer;
-                if (nextPlayer == ROUND) {
+                if (nextPlayer == ROUND) { // si dernier joueur = rond alors prochain joueur = croix
                     nextPlayer = CROSS;
                 }
                 else {
-                    nextPlayer = ROUND;
+                    nextPlayer = ROUND; // sinon reste rond
                 }
             }
         }
@@ -97,23 +97,20 @@ void placePawn() { //Place un pion aux coordonnées indiquées par l'utilisateur
 unsigned endGame() { //Teste si le jeu est terminé (Un gagnant ou match nul. Dans ce cas, octroie 1 point à chaque candidat dans le tournoi.)
     static unsigned winnerTemp = 3;
     static bool ended = false;
-    if (grid[1][1] != VOID) {
+    if (grid[1][1] != VOID) { //   combinaison gagnantes    01 = 11 = 21   //   10 = 11 = 12   //   00 = 11 = 22   //   02 = 11 = 20
         if (((grid[0][1] == grid[1][1]) && (grid[1][1] == grid[2][1])) || ((grid[1][0] == grid[1][1]) && (grid[1][1] == grid[1][2])) || ((grid[0][0] == grid[1][1]) && (grid[1][1] == grid[2][2])) || ((grid[0][2] == grid[1][1]) && (grid[1][1] == grid[2][0]))) {
-            //   combinaison gagnantes    01 = 11 = 21   //   10 = 11 = 12   //   00 = 11 = 22   //   02 = 11 = 20
             winnerTemp = grid[1][1];
             ended = true;
         }
     }
-    if ((!ended) && (grid[0][0] != VOID)) {
+    if ((!ended) && (grid[0][0] != VOID)) { //   combinaison gagnantes    00 = 01 = 02   //   00 = 10 = 20
         if (((grid[0][0] == grid[0][1]) && (grid[0][1] == grid[0][2])) || ((grid[0][0] == grid[1][0]) && (grid[1][0] == grid[2][0]))) {
-            //   combinaison gagnantes    00 = 01 = 02   //   00 = 10 = 20
             winnerTemp = grid[0][0];
             ended = true;
         }
     }
-    if ((!ended) && (grid[2][2] != VOID)) {
+    if ((!ended) && (grid[2][2] != VOID)) { //   combinaison gagnantes    20 = 21 = 22   //   02 = 12 = 22
         if (((grid[2][0] == grid[2][1]) && (grid[2][1] == grid[2][2])) || ((grid[0][2] == grid[1][2]) && (grid[1][2] == grid[2][2]))) {
-            //   combinaison gagnantes    20 = 21 = 22   //   02 = 12 = 22
             winnerTemp = grid[2][2];
             ended = true;
         }
@@ -122,14 +119,15 @@ unsigned endGame() { //Teste si le jeu est terminé (Un gagnant ou match nul. Da
         if (winnerTemp == ROUND) { // si gagnant = rond
             winnerTemp = 0;
         }
-        else {
+        else {                    // si gagnant = croix
             winnerTemp = 1;
         }
     }
+    // si égalité (càd la grille est remplie mais aucune équipe n'a réalisé de combinaison gagnante)
     if ((grid [0] [0] != VOID) && (grid [0] [1] != VOID) && (grid [0] [2] != VOID) && (grid [1] [0] != VOID) && (grid [1] [1] != VOID) && (grid [1] [2] != VOID) && (grid [2] [0] != VOID) && (grid [2] [1] != VOID) && (grid [2] [2] != VOID)) {
         winnerTemp = 2;
     }
-    for (unsigned i = 0 ; i < ROW ; ++i) {
+    for (unsigned i = 0 ; i < ROW ; ++i) { // tant qu'une case est vide, le jeu continue
         for (unsigned j = 0 ; j < COLUMN; ++j) {
             if (grid [i] [j] == VOID)
                 ended = false;
@@ -141,7 +139,6 @@ unsigned endGame() { //Teste si le jeu est terminé (Un gagnant ou match nul. Da
 unsigned morpion(const string & t1, const string & t2) {
 
     static unsigned winner;
-
     vector<string> teams;
     if (rand()%2 == 0) { // Attribue aléatoirement un type de pion à une équipe.
         teams = {t1, t2};
