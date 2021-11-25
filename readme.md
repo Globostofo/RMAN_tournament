@@ -212,6 +212,8 @@ Chaque programme renvoie soit 0 pour annoncer la victoire de l'équipe désigné
 ### 3.1 Memory
 
 ### 3.2 Morpion
+Le principe du morpion est de réussir à aligner trois pions horizontalement, verticalement ou même en diagonale dans une grille de jeu de 3x3 avant son adversaire pour gagner la partie.
+Pour placer un pion, il suffit de suivre les instructions données par le terminal, c'est à dire entrer le numéro de la ligne puis le numéro de la colonne de la case où vous souhaitez placer votre pion.
 
 ### 3.3 Puissance 4
 
