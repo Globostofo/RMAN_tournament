@@ -65,8 +65,8 @@ void displayTabP4(const vector<vector<cellP4>> & TabP4){
         cout << "----------------------" << endl << "|";
         for(unsigned j=0; j<7; j++){
             if(TabP4[i][j].color == "Empty") cout << "  " << "|";
-            else if(TabP4[i][j].color == "Yellow") cout << "\033[43m  \033[00m" << "|";
-            else cout << "\033[41m  \033[00m" << "|";
+            else if(TabP4[i][j].color == "Yellow") cout << "\033[43m " << "\033[33mJ\033[00m" << "|";
+            else cout << "\033[41m " << "\033[31mR\033[00m" << "|";
         }
         cout << endl;
     }
