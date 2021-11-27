@@ -210,6 +210,7 @@ La dernière étape est d'ajouter les points à l'équipe gagnante de chaque ren
 Chaque programme renvoie soit 0 pour annoncer la victoire de l'équipe désignée comme équipe 1, 1 pour annoncer la victoire de l'équipe désignée en équipe 2 et 2 si jamais il y a une égalité.
 
 ### 3.1 Memory
+Au Memory, le but du jeu est de retourner le plus de paire possible avant la fin de la partie. La partie se fini donc quand plus aucune carte n'est retournée sachant qu'on est obligée d'en trouver deux identiques pour qu'elles le restent. Lorsque une équipe retourne correctement deux carte d'une même paire, elle peuvent retenter sa chance pour en trouver une autre. Au final c'est l'équipe qui en a trouvé le plus qui gagne la partie.
 
 ### 3.2 Morpion
 Le principe du morpion est de réussir à aligner trois pions horizontalement, verticalement ou même en diagonale dans une grille de jeu de 3x3 avant son adversaire pour gagner la partie.
