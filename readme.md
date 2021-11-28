@@ -217,6 +217,17 @@ Le principe du morpion est de réussir à aligner trois pions horizontalement, v
 Pour placer un pion, il suffit de suivre les instructions données par le terminal, c'est à dire entrer le numéro de la ligne puis le numéro de la colonne de la case où vous souhaitez placer votre pion.
 
 ### 3.3 Puissance 4
+Le jeu du puissance 4 est très simple à comprendre. Les deux équipes reçoivent aléatoirement, une couleur différente rouge ou jaune et doivent aligner 4 jetons adjacent, de manière linéaire ou diagonale pour remporter la partie. Le fonctionnement du jeu se fait ainsi : 
+	-récupération des deux équipes, 
+	-choix aléatoire des couleurs, 
+	-un tableau vierge de puissance 4 est généré, 
+	-les jaunes choisissent une colonne, 
+	-si cette dernière a au moins une case vide ils mettent un jeton à la case libre la plus basse du tableau, sinon ils choisissent une autre colonne, 
+	-le programme vérifie qu'il n'y a aucune condition de victoire remplit, 
+	-les rouges jouent à leur tour, 
+	-le programme vérifie qu'il n'y a aucune condition de victoire remplit, 
+	-il vérifie que toutes les cases du tableau ne soient pas remplit, 
+	-si une condition de victoire est remplit le programme renvoie 0 si l'équipe n°1 gagne, 1 si l'équipe n°2 gagne et 2 si toutes les cases du tableau sont remplit et qu'il n'y a aucune victoire.
 
 ### 3.4 Echecs
 Le mini-jeu d'échec reprend les règles basiques du jeu d'échec.  
