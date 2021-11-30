@@ -4,20 +4,18 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        global.cxx \
         main.cpp \
-        tournament/games/echecs.cpp \
+        tournament/tournament.cpp \
+        tournament/games/chess.cpp \
+        tournament/games/connect4.cpp \
         tournament/games/memory.cpp \
-        tournament/games/morpion.cpp \
-        tournament/games/p4.cpp \
-        tournament/games/rock_paper_scissors.cpp \
-        tournament/tournament.cpp
+        tournament/games/priceisright.cpp \
+        tournament/games/rockpaperscissors.cpp \
+        tournament/games/tictactoe.cpp
 
 HEADERS += \
-    tournament/global.hpp \
-    tournament/structs.h
+    global.h
 
 DISTFILES += \
-    readme.md \
-    tournament/NOTAMOAMEM.md \
-    tournament/students.txt \
-    tournament/memory.txt
+    readme.md 

@@ -1,28 +1,42 @@
 /**
-    PROJET : Votre equipe est chargee d’organiser un tournoi de petits jeux selon le systeme suisse.
-    Fichier d’entree la liste (nom / prenom) des 120 etudiants de la promo
-        •Saisir la graine.
-        •Saisir le nombre d’equipes (entre 10 et 20)Pour chaque equipe :
-        •Saisir son nom (D'EQUIPE?)
-        •Saisir les noms / prenoms des participants
-        •Faire un systeme suisse de competition
-        •Un round par petit jeu
-        •Exemple de petits jeux (pendu, agedu capitaine, tic tac toe, pierre feuille ciseau, ...)
-        •A la fin d’un round affiche le classement
-        •Affiche le classement final
-        •Prevoir (au moins) 3 jeu d’essais en entree et 3 fichiers oracle correspondant
-*/
+ *
+ * @file    main.cpp
+ *
+ * @author  R. Clement
+ *
+ * @date    27/11/2021
+ *
+ * @brief   Lancement d'un tournoi
+ *
+ **/
+
+#include <iostream>
 
 #include "./tournament/tournament.cpp"
 
 using namespace std;
+using namespace global_files;
 
-int main() {
-    // Nouvelle graine pour l'aleatoire
-    srand(time(NULL));
+int main(int argc, char *argv[]) {
+    // Verification des arguments du programme
+    if (argc != 2) {
+        cout << "Erreur dans la saisie des arguments (lisez le readme.md pour plus d'informations)" << endl;
+        return 0;
+    }
+
+    ifs.open(argv[1]);
+    ofs.open(ask4UInput("", false));
+
+    // Saisie de la graine
+    srand(stoi(ask4UInput("Graine de l'aleatoire : ")));
+    pressEnter();
 
     // Lancement du tournoi
     tournament();
+
+    // Fermeture des fichiers d'entrees et de sorties
+    global_files::ifs.close();
+    global_files::ofs.close();
 
     return 0;
 }

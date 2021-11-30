@@ -1,0 +1,1230 @@
+// Nom du fichier de sortie
+output.txt
+// Graine
+2
+
+// Noms et Prenoms des joueurs
+ABOU
+Bryan
+ALBERTELLI
+Maxime
+ALI
+Mdallah
+AUTANT
+Félix
+BADJOUDJ
+Hana
+BARTHELLEMY
+Nicolas
+BELKHODDAM
+Habib
+BIGA
+Paul
+BONNIN
+Enzo
+BOUGEARD
+Bastien
+BOUVERET
+Victor
+CANALE
+Enzo
+CAPELIER
+Mathieu
+CARRE
+Clément
+CASTILLO
+Clarens
+CAZALS
+Mathias
+CECCARELLI
+Luca
+CHARLIER DIEUZAIDE
+Lucas
+CHARPENTIER
+Théo
+CHUPIN-BEVIER
+Tao
+CILLEROS
+Antony
+CLAVERIE
+Killian
+CLEMENT
+Romain
+COMBET
+Jules
+CONTINO
+Maxime
+DAM QUANG
+Minh
+DE PERMENTIER
+Thibault
+DE PLANCKE
+Tibo
+DECLE
+Romain
+DEJEAN
+Thomas
+DELIN
+Maxime
+DELOGU
+Louis
+DESSAUD
+Hugo
+DJERIAN
+Noémie
+DOMAGE-CICCHELERO
+Hugo
+DUGOURD
+Clément
+EGENSCHEVILLER
+Frédéric
+ELISA
+Ellio
+FABRE
+Lucas
+GANASSI
+Alexandre
+GAYRARD
+Elvis
+GERVILLIERS
+Mattias
+GIL
+Killian
+GINI
+David
+GIRAULT
+Kevin
+GODEREAUX
+Heliot
+GONTIER
+Luke
+GONZALES
+Andy
+GONZALES
+Lenny
+GOUDEZEUNE
+Antonin
+GOUJON
+William
+GROSS
+Jérémy
+HENAULT
+Clémentine
+HUGUES
+Mélanie
+IOV
+Clément
+JOLY
+Lucas
+KADDOURI
+Mohammed
+KUSIAK
+Guillaume
+LAFITTE
+Antoine
+LAGET
+Johan
+LAHAIE
+Thibaut
+LAIB
+Hossame-eddine
+LAMBERT
+Maxime
+LANGUILLE
+Gabriel
+LARBAOUI
+Riyad
+LARTIGAUD
+Elliot
+LAURENT
+Nicolas
+LE MAISTRE
+Tom
+LECOMTE
+Arthur
+LEINER
+Lucas
+LEYDIER
+Élisée
+LITIM
+Nino
+LOPITAUX
+Florian
+LUONG
+Le marshals
+MAOULIDA ATTOUMANI
+Yazid-raoul
+MARIOTTI
+Alexis
+MATTERA
+Aurelien
+MEKERKE
+Enzo
+METAYER
+Sloane
+MICHEL
+Jorick
+MONTERIN
+Maxime
+MOUMANE
+Souhaïla
+MURATET
+Lucas
+NEGGAZI
+Ramy
+PISTORESI
+Marius
+PONOMARENKO
+Édouard
+PUGI
+Yohan
+RAGAIGNE
+Fabrice
+RAMDANI
+Djibril
+REBOUL
+Nathan
+RIVALIN
+Eliott
+RIZIKI
+Manssour
+RODRIGUES
+Lucas
+ROUTIER
+Fabien
+RUBINI
+Thomas
+RUELLAN
+Théo
+SAADI
+Élias
+SAADI
+Nils
+SABI
+Rayane
+SARTI
+Alex
+SAUVA
+Mathieu
+SIACI
+Abdennour
+SIMAILA
+Djalim
+TOMEZAK
+Melvin
+TOUREILLE
+François
+TRAYNARD
+Sacha
+TRIGLIA
+Yanis
+VACHET
+Audric
+VALLS
+Marion
+VEYSSEYRE
+Léo
+VIAL
+Amaury
+VIGON
+Nathan
+VOLLAIRE
+Mathis
+VOLPEI
+Jules
+WELTER
+Antoine
+YAHIA-AMAR
+Mathieu
+ZERKOUNI
+Sofian
+
+// Nombre d'equipes
+10
+
+// Nom des equipes
+paon
+
+oesophage
+
+cucurbitace
+
+enclume
+
+parpaing
+
+cassoulet
+
+pamplemousse
+
+sommier
+
+helicoptere
+
+dromadaire
+
+
+
+
+
+
+// Jeu 1 : le pierre feuille ciseaux
+// Rencontre 1 : cassoulet vs cucurbitace
+3
+feuille
+ciseaux
+ciseaux
+pierre
+feuille
+pierre
+feuille
+ciseaux
+// Victoire de cassoulet
+
+
+
+// Rencontre 2 : dromadaire vs enclume
+1
+ciseaux
+ciseaux
+pierre
+pierre
+feuille
+pierre
+// Victoire de dromadaire
+
+
+
+// Rencontre 3 : helicoptere vs oesophage
+5
+ciseaux
+pierre
+ciseaux
+pierre
+ciseaux
+pierre
+pierre
+feuille
+feuille
+ciseaux
+// Victoire d'oesophage
+
+
+
+// Rencontre 4 : pamplemousse vs paon
+1
+pierre
+feuille
+// Victoire de paon
+
+
+
+// Rencontre 5 : parpaing vs sommier
+1
+ciseaux
+ciseaux
+feuille
+pierre
+// Victoire de parpaing
+
+
+
+
+
+
+
+
+// Jeu 2 : les echecs
+// Rencontre 1 : cucurbitace vs dromadaire
+// cucurbitace joue avec les blancs
+e2 e4
+e7 e5
+d1 h5
+b8 c6
+f1 c4
+g8 f6
+h5 f7
+// Victoire de cucurbitace (mat du berger)
+
+
+
+
+
+// Rencontre 2 : oesophage vs paon
+// paon joue avec les blancs
+f2 f3
+e7 e6
+g2 g4
+d8 h4
+// Victoire d'oesophage (mat en 2 coups)
+
+
+
+
+
+// Rencontre 3 : parpaing cassoulet
+// Cette partie est issue de la finale du championnat du monde de blitz en 2019 opposant Magnus Carlsen (blancs) à Hikaru Nakamura (noirs)
+// parpaing joue avec les blancs
+d2 d4
+g8 f6
+g1 f3
+d7 d5
+c1 f4
+c7 c5
+e2 e3
+e7 e6
+b1 d2
+f8 d6
+f4 d6
+d8 d6
+d4 c5
+d6 c5
+c2 c4
+d5 c4
+f1 c4
+e8 g8
+a1 c1
+c5 e7
+e1 g1
+b7 b6
+d1 e2
+c8 b7
+f1 d1
+b8 d7
+c4 a6
+d7 c5
+a6 b7
+e7 b7
+f3 e5
+c5 d7
+e2 f3
+b7 a6
+e5 c6
+g8 h8
+d2 c4
+a6 a2
+g2 g4
+d7 c5
+c4 d6
+c5 b3
+c1 c2
+a2 a4
+c2 c4
+a4 a6
+g4 g5
+f6 d7
+c4 h4
+b3 c5
+d6 f7
+f8 f7
+f3 f7
+a6 e2
+d1 d7
+c5 d7
+f7 d7
+a8 f8
+h4 f4
+f8 e8
+d7 e8
+// Victoire de paraping
+
+
+
+
+
+// Rencontre 4 : enclume vs helicoptere
+// Cette partie est issue d'une rencontre opposant Anderssen (blancs) à Kieristsky (noirs) en 1951
+// enclume joue avec les blancs
+e2 e4
+e7 e5
+f2 f4
+e5 f4
+f1 c4
+d8 h4
+e1 f1
+b7 b5
+c4 b5
+g8 f6
+g1 f3
+h4 h6
+d2 d3
+f6 h5
+f3 h4
+h6 g5
+h4 f5
+c7 c6
+g2 g4
+h5 f6
+h1 g1
+c6 b5
+h2 h4
+g5 g6
+h4 h5
+g6 g5
+d1 f3
+f6 g8
+c1 f4
+g5 f6
+b1 c3
+f8 c5
+c3 d5
+f6 b2
+f4 d6
+c5 g1
+e4 e5
+b2 a1
+f1 e2
+b8 a6
+f5 g7
+e8 d8
+f3 f6
+g8 f6
+d6 e7
+// Victoire d'enclume
+
+
+
+
+
+// Rencontre 5 : pamplemousse vs sommier
+// Cette partie est le match nul le plus rapide de l'histoire
+// pamplemousse joue avec les blancs
+e2 e3
+a7 a5
+d1 h5
+a8 a6
+h5 a5
+h7 h5
+a5 c7
+a6 h6
+h2 h4
+f7 f6
+c7 d7
+e8 f7
+d7 b7
+d8 d3
+b7 b8
+d3 h7
+b8 c8
+f7 g6
+c8 e6
+// Pat
+
+
+
+
+
+
+// Jeu 3 : le puissance 4
+// Rencontre 1 : oesophage vs cucurbitace
+// oesophage commence
+2
+1
+5
+2
+5
+3
+5
+5
+3
+3
+4
+3
+4
+4
+4
+1
+h
+2
+1
+1
+// Victoire d'oesophage
+
+
+
+// Rencontre 2 : parpaing vs dromadaire
+// parpaing commence
+0
+1
+2
+3
+4
+5
+0
+1
+2
+3
+4
+5
+0
+1
+2
+3
+4
+5
+6
+0
+1
+2
+3
+4
+5
+0
+1
+2
+3
+4
+5
+0
+1
+2
+3
+4
+5
+6
+6
+6
+6
+6
+// Egalite (grille pleine)
+
+
+
+// Rencontre 3 : enclume vs paon
+// enclume commence
+3
+6
+2
+1
+1
+2
+3
+3
+6
+2
+5
+4
+5
+4
+3
+1
+4
+4
+// Victoire de paon
+
+
+
+// Rencontre 4 : pamplemousse vs sommier
+// sommier commence
+0
+0
+1
+1
+2
+2
+3
+// Victoire de sommier
+
+
+
+// Rencontre 5 : cassoulet vs helicoptere
+// helicoptere commence
+0
+5
+6
+5
+6
+5
+6
+5
+// Victoire de cassoulet
+
+
+
+
+
+
+// Jeu 4 : le juste prix
+// Rencontre 1 : oesophage vs parpaing
+100
+// oesophage commence
+50
+25
+35
+30
+33
+31
+32
+// Victoire d'oesophage
+
+
+
+// Rencontre 2 : cucurbitace vs paon
+10
+// cucurbitace commence
+5
+8
+7
+6
+// Victoire de paon
+
+
+
+// Rencontre 3 : dromadaire vs sommier
+1000
+// sommier commence
+500
+750
+650
+700
+675
+690
+695
+692
+691
+// Victoire de sommier
+
+
+
+// Rencontre 4 : cassoulet vs enclume
+1000000000
+// cassoulet commence
+500000000
+250000000
+350000000
+300000000
+325000000
+320000000
+322500000
+321000000
+320500000
+320250000
+320125000
+320135000
+320145000
+320147500
+320149000
+320148000
+320148500
+320148750
+320148900
+320148800
+320148850
+320148875
+320148890
+320148895
+320148892
+// Victoire de cassoulet
+
+
+
+// Rencontre 5 : pamplemousse vs helicoptere
+2
+// helicoptere commence
+2
+// Victoire d'helicoptere
+
+
+
+
+
+
+
+// Jeu 5 : le memory
+// Rencontre 1 : oesophage vs paon
+A1
+A2
+
+A3
+A4
+
+A5
+A6
+
+B1
+B2
+
+B3
+A1
+B4
+B5
+
+B5
+A6
+B6
+C1
+
+C2
+C1
+C3
+C4
+
+C5
+C6
+
+D1
+B4
+D2
+D3
+
+D3
+A5
+D4
+B2
+D5
+D6
+
+D6
+A3
+E1
+A2
+E2
+E3
+
+E3
+A4
+E4
+D5
+E5
+C4
+E6
+B1
+F1
+C5
+F2
+D2
+F3
+B6
+F4
+C3
+F5
+C6
+F6
+E2
+// Victoire de paon
+
+
+
+
+
+// Rencontre 2 : parpaing vs sommier
+F6
+F5
+
+F4
+F3
+
+F2
+F5
+F1
+E6
+
+E5
+E4
+
+E3
+E6
+E2
+E1
+
+E1
+F4
+D6
+D5
+
+D4
+D3
+
+D3
+D5
+D2
+D1
+
+C6
+E4
+C5
+C4
+
+C4
+E2
+C3
+F1
+C2
+C1
+
+B6
+D1
+B5
+C5
+B4
+D2
+B3
+D6
+B2
+F3
+B1
+F6
+A6
+A5
+
+A5
+C2
+A4
+D4
+A3
+E5
+A2
+A6
+A1
+C1
+// Victoire de parpaing
+
+
+
+
+
+// Rencontre 3 : cassoulet vs cucurbitace
+A1
+B1
+
+C1
+D1
+
+D1
+A1
+E1
+F1
+
+A2
+E1
+B2
+C2
+
+D2
+C2
+E2
+F2
+
+F2
+B1
+A3
+B3
+
+C3
+D3
+
+E3
+F3
+
+F3
+B3
+A4
+B4
+
+B4
+B2
+C4
+D4
+
+E4
+C3
+F4
+C4
+A5
+C1
+B5
+F1
+C5
+E2
+D5
+E5
+
+E5
+D4
+F5
+A4
+A6
+D5
+B6
+A3
+C6
+E3
+D6
+E6
+F6
+D3
+// Victoire de cucurbitace
+
+
+
+
+
+// Rencontre 4 : dromadaire vs enclume
+A6
+B6
+
+C6
+D6
+
+E6
+F6
+
+F6
+C6
+A5
+B5
+
+C5
+D5
+
+E5
+F5
+
+A4
+E5
+B4
+B6
+C4
+D4
+
+E4
+F4
+
+F4
+F5
+A3
+D4
+B3
+C3
+
+C3
+B5
+D3
+D5
+E3
+E4
+F3
+A5
+A2
+B2
+
+B2
+C5
+C2
+D2
+
+D2
+A2
+E2
+E6
+F2
+A1
+
+A1
+C4
+B1
+B3
+C1
+D6
+D1
+C2
+E1
+F2
+F1
+A6
+// Victoire de dromadaire
+
+
+
+
+
+// Rencontre 5 : helicoptere vs pamplemousse
+F1
+E1
+
+D1
+C1
+
+B1
+A1
+
+F2
+E1
+E2
+D2
+
+C2
+B1
+B2
+A2
+
+F3
+A1
+E3
+D3
+
+C3
+B3
+
+B3
+B2
+A3
+F4
+
+E4
+F4
+D4
+D3
+C4
+D2
+B4
+C3
+A4
+F5
+
+F5
+F1
+E5
+E3
+D5
+A3
+C5
+C1
+B5
+A5
+
+A5
+E2
+F6
+A4
+E6
+B5
+D6
+D1
+C6
+A2
+B6
+A6
+// Victoire d'helicoptere
+
+
+
+
+
+
+
+// Jeu 6 : le morpion
+// Rencontre 1 : oesophage vs paon
+// oeusophage commence
+1
+1
+2
+2
+3
+3
+3
+1
+1
+3
+1
+2
+2
+3
+// Victoire d'oesophage
+
+
+
+// Rencontre 2 : parpaing vs cucurbitace
+// parpaing commence
+2
+2
+1
+2
+3
+1
+1
+3
+1
+1
+2
+1
+3
+3
+// Victoire de parpaing
+
+
+
+// Rencontre 3 : dromadaire vs sommier
+// sommier commence
+2
+1
+1
+3
+2
+2
+2
+3
+3
+3
+1
+1
+1
+2
+3
+2
+3
+1
+// Egalite
+
+
+
+// Rencontre 4 : cassoulet vs helicoptere
+// helicoptere commence
+3
+3
+2
+2
+2
+1
+3
+1
+1
+3
+2
+3
+1
+2
+1
+1
+3
+2
+// Egalite
+
+
+
+// Rencontre 5 : enclume vs pamplemousse
+// pamplemousse commence
+2
+2
+1
+3
+2
+1
+2
+3
+3
+3
+1
+1
+1
+2
+3
+2
+3
+1
+// Egalite
+
+
+
+// Gagnant du tournoi : oesophage
+// Fin du programme
