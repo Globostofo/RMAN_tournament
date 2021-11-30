@@ -211,22 +211,31 @@ Le principe du morpion est de réussir à aligner trois pions horizontalement, v
 Pour placer un pion, il suffit de suivre les instructions données par le terminal, c'est à dire entrer le numéro de la ligne puis le numéro de la colonne de la case où vous souhaitez placer votre pion.
 
 ### 4.3 Puissance 4
-Le jeu du puissance 4 suis les mêmes règles que le jeu de base, l'équipe gagne lorsqu'elle aligne 4 pions dans la grille.
-
+Le jeu du puissance 4 est très simple à comprendre. Les deux équipes reçoivent aléatoirement, une couleur différente rouge ou jaune et doivent aligner 4 jetons adjacent, de manière linéaire ou diagonale pour remporter la partie. Le fonctionnement du jeu se fait ainsi : 
+- récupération des deux équipes,  
+- choix aléatoire des couleurs,  
+- un tableau vierge de puissance 4 est généré,  
+- les jaunes choisissent une colonne,  
+- si cette dernière a au moins une case vide ils mettent un jeton à la case libre la plus basse du tableau, sinon ils choisissent une autre colonne,  
+- le programme vérifie qu'il n'y a aucune condition de victoire remplit,  
+- les rouges jouent à leur tour,  
+- le programme vérifie qu'il n'y a aucune condition de victoire remplit,  
+- il vérifie que toutes les cases du tableau ne soient pas remplit,  
+- si une condition de victoire est remplit le programme renvoie 0 si l'équipe n°1 gagne, 1 si l'équipe n°2 gagne et 2 si toutes les cases du tableau sont remplit et qu'il n'y a aucune victoire. 
 ### 4.4 Echecs
 Le mini-jeu d'échec reprend les règles basiques du jeu d'échec.  
-Le fonctionnement du jeu se fait au travers de plusieurs étapes qui sont les suivantes :
-	- récuperer le coup de l'utilisateur
-	- vérifier que :
-	    - la piece que l'on veut bouger existe
-	    - le mouvement est légal (on n'essaye pas de déplacer une tour en diagonale ou on ne se met pas soit même en échec)
-	- déplacer la piece
-	- si on a un échec et mat
-	    - on renvoie le gagnant de la partie
-	- sinon si on a un match nul (pat ou insuffisance de matériel)
-	    - on revoie 2 (égalité)
-	- si aucun de ses cas n'est vrai
-	    - on recommence au premier tiret en changeant la couleur de l'équipe qui joue
+Le fonctionnement du jeu se fait au travers de plusieurs étapes qui sont les suivantes :  
+- récuperer le coup de l'utilisateur
+- vérifier que :
+    - la piece que l'on veut bouger existe
+    - le mouvement est légal (on n'essaye pas de déplacer une tour en diagonale ou on ne se met pas soit même en échec)
+- déplacer la piece
+- si on a un échec et mat
+    - on renvoie le gagnant de la partie
+- sinon si on a un match nul (pat ou insuffisance de matériel)
+    - on revoie 2 (égalité)
+- si aucun de ses cas n'est vrai
+    - on recommence au premier tiret en changeant la couleur de l'équipe qui joue
 
 ### 4.5 Pierre feuille ciseaux
 Le but du jeu est simple. Il faut essayer de gagner en choississant l'une des possibilités qui sont la pierre, qui gagne contre les ciseaux, la feuille qui gagne contre la pierre et les ciseaux qui gagnent contre la feuille. La première équipe à arriver au score max définit au début de la partie gagne.  
